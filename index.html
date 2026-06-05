@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tung Lab — Apps by Tung</title>
+  <meta name="description" content="Tung Lab — small apps built for real workflows. Direct downloads, guides, and screenshots." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== THEME TOKENS — Claude-style warm palette ===== */
+    :root, :root[data-theme="light"] {
+      --bg:#faf8f4; --surface:#ffffff; --surface-2:#f7f3ec;
+      --ink:#22201c; --ink-soft:#55514a; --muted:#928d83;
+      --border:#e8e3d8; --shadow:#22201c; --hl:#ffffff;
+      --accent:#cc6b4e; --accent-lt:#e29274; --accent-soft:#f6e7df; --accent-ink:#8a4429;
+      --accent2:#5e89ad; --avatar-dk:#211d1a; --skin:#e6b289;
+      --warn-bg:#faf1d7; --warn-border:#ecd698; --warn-ink:#6b531a;
+      --band:#22201c; --band-ink:#f4efe6; --band-muted:#a8a298; --band-border:#3a362f;
+    }
+    :root[data-theme="dark"] {
+      --bg:#1b1a17; --surface:#262420; --surface-2:#2e2b26;
+      --ink:#f3eee4; --ink-soft:#cbc5b8; --muted:#928d82;
+      --border:#3a362f; --shadow:#000000; --hl:#f3eee4;
+      --accent:#e08a5f; --accent-lt:#eaa888; --accent-soft:#392c24; --accent-ink:#f0c4a8;
+      --accent2:#73a3c6; --avatar-dk:#4a443c; --skin:#e6b289;
+      --warn-bg:#332a18; --warn-border:#5c4a24; --warn-ink:#e8cf94;
+      --band:#141311; --band-ink:#f3eee4; --band-muted:#928d82; --band-border:#34302a;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background .25s ease, color .25s ease;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+    .navlink:hover { color: var(--accent) !important; }
+    .appcard { transition: transform .14s ease, box-shadow .14s ease; }
+    .appcard:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--shadow); }
+    .shots-scroll { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    .shots-scroll::-webkit-scrollbar { height: 8px; }
+    .shots-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+    .shot-link:hover {
+      transform: scale(1.045);
+      box-shadow: 8px 8px 0 var(--shadow) !important;
+      z-index: 2;
+    }
+    button.shot-link {
+      font: inherit;
+      text-align: inherit;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .detail-grid { grid-template-columns: 1fr !important; }
+      .gallery-grid { grid-template-columns: 1fr 1fr !important; }
+      .dl-panel { position: static !important; }
+      .appcard-row { grid-template-columns: auto 1fr !important; }
+      .cardrow-cta { grid-column: 1 / -1; flex-direction: row !important; }
+    }
+    @media (max-width: 620px) {
+      .gallery-grid { grid-template-columns: 1fr !important; }
+      .appcard-row { grid-template-columns: 1fr !important; }
+      .cardrow-cta { flex-direction: column !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="data.jsx?v=20260605-download-meta"></script>
+  <script type="text/babel" src="ui.jsx?v=20260605-pointing-mascot-logo-outline"></script>
+  <script type="text/babel" src="home.jsx?v=20260605-about-mascot-theme"></script>
+  <script type="text/babel" src="fphoto.jsx?v=20260605-download-meta"></script>
+  <script type="text/babel" src="app.jsx?v=20260605-themed-screenshots"></script>
+</body>
+</html>
