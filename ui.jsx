@@ -237,12 +237,12 @@ function Header({ locale, setLocale, t, onNav, route, theme, toggleTheme }) {
   }, []);
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: scrolled ? "color-mix(in srgb, var(--bg) 86%, transparent)" : "transparent", backdropFilter: scrolled ? "blur(10px)" : "none", borderBottom: scrolled ? "2px solid var(--border)" : "2px solid transparent", transition: "background .2s, border-color .2s" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <button onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+      <div className="site-header-inner" style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <button className="site-brand" onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
           <BrandMascot theme={theme} />
-          <span style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
+          <span className="site-brand-text" style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
         </button>
-        <nav style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
           <NavLink active={false} onClick={() => onNav("home", "apps")}>{t.nav.apps}</NavLink>
           <NavLink active={false} onClick={() => onNav("home", "about")}>{t.nav.about}</NavLink>
@@ -260,7 +260,7 @@ function NavLink({ children, active, onClick }) {
 }
 function ThemeToggle({ theme, toggleTheme }) {
   return (
-    <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light" : "Switch to dark"} style={{ marginLeft: 8, width: 40, height: 36, border: "2px solid var(--ink)", background: "var(--surface)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink)" }}>
+    <button className="theme-toggle" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light" : "Switch to dark"} style={{ marginLeft: 8, width: 40, height: 36, border: "2px solid var(--ink)", background: "var(--surface)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink)" }}>
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>);
 
@@ -273,7 +273,7 @@ function MoonIcon() {
 }
 function LangSwitch({ locale, setLocale }) {
   return (
-    <div style={{ display: "flex", marginLeft: 8, border: "2px solid var(--ink)" }}>
+    <div className="lang-switch" style={{ display: "flex", marginLeft: 8, border: "2px solid var(--ink)" }}>
       {["vi", "en"].map((l) =>
       <button key={l} onClick={() => setLocale(l)} aria-label={l === "vi" ? "Tiếng Việt" : "English"} style={{ padding: "6px 12px", fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", border: "none", background: locale === l ? "var(--ink)" : "var(--surface)", color: locale === l ? "var(--surface)" : "var(--ink)" }}>{l.toUpperCase()}</button>
       )}

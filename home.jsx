@@ -115,7 +115,7 @@ function MascotScene({ theme }) {
   const asleep = theme === "dark";
   return (
     <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
-      <div style={{ position: "relative", width: 380, height: 380 }}>
+      <div className="hero-mascot-frame" style={{ position: "relative", width: 380, height: 380 }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 45%, var(--accent-soft), transparent 65%)" }} />
         {asleep ? (
           <>

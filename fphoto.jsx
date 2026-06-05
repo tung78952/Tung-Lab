@@ -51,10 +51,10 @@ function Detail({ app, locale, t, onNav, theme }) {
       <section style={{ background: "var(--bg)", position: "relative", overflow: "hidden" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto", padding: "34px 28px 60px", display: "grid", gridTemplateColumns: "1fr 0.82fr", gap: 48, alignItems: "start" }} className="detail-grid">
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 22 }}>
+            <div className="detail-title-block" style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 22 }}>
               <div style={{ display: "flex" }}><Sprite name={app.pixelLogo} scale={9} /></div>
               <div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+                <div className="detail-title-row" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
                   <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 48, color: "var(--ink)", margin: 0, lineHeight: 1 }}>{app.name}</h1>
                   <StatusBadge status={app.status} t={t} />
                 </div>
