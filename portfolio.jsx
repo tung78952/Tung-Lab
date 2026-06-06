@@ -90,7 +90,7 @@ function CoffeeSteam() {
     { left: 36, top: 24, path: [[1, 3], [2, 3], [2, 2], [1, 1], [1, 0], [0, 0]] }
   ];
   return (
-    <div aria-hidden="true" style={{ position: "absolute", left: 132, top: 162, width: 72, height: 84, zIndex: 3, pointerEvents: "none" }}>
+    <div aria-hidden="true" style={{ position: "absolute", left: 120, top: 120, width: 72, height: 84, zIndex: 3, pointerEvents: "none" }}>
       {wisps.map((wisp, i) => (
         <div key={i} className="coffee-steam-wisp" style={{ position: "absolute", left: wisp.left, top: wisp.top, width: 30, height: 50 }}>
           {wisp.path.map(([x, y], j) => (
@@ -115,6 +115,9 @@ function PortfolioProjects({ copy, textKey }) {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: "auto" }}>
                 {project.tags.map((tag) => <TechTag key={tag}>{tag}</TechTag>)}
               </div>
+              <a href={project.repo} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start", gap: 8, marginTop: 4, padding: "9px 13px", border: "2px solid var(--ink)", background: "var(--surface-2)", color: "var(--ink)", boxShadow: "3px 3px 0 var(--shadow)", textDecoration: "none", fontSize: 13, fontWeight: 800 }}>
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
             </article>
           ))}
         </div>
