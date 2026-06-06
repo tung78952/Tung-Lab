@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tung — mascot tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#faf8f4; --surface:#ffffff; --surface-2:#f7f3ec;
+    --ink:#22201c; --ink-soft:#55514a; --muted:#928d83;
+    --border:#e8e3d8; --shadow:#22201c; --accent:#cc6b4e; --accent-ink:#8a4429; --accent-soft:#f6e7df;
+  }
+  body.dark{
+    --bg:#161512; --surface:#201e1a; --surface-2:#1a1916;
+    --ink:#f3eee4; --ink-soft:#c7c1b5; --muted:#8b867c;
+    --border:#34302a; --shadow:#000000; --accent:#e0875f; --accent-ink:#f0b48f; --accent-soft:#2a2620;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:var(--bg); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding:40px 28px 90px;
+    transition:background .3s ease,color .3s ease;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .kicker span{width:8px;height:8px;background:var(--accent);}
+  .kicker b{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:700;}
+  h1{font-family:'Pixelify Sans',sans-serif;font-size:clamp(34px,4.6vw,54px);line-height:1.32;margin:0 0 18px;letter-spacing:-.01em;}
+  .lead{font-size:17px;color:var(--ink-soft);line-height:1.65;max-width:660px;margin:0 0 4px;}
+  .note{font-size:14px;color:var(--muted);max-width:660px;margin:8px 0 0;}
+  .controls{display:flex;gap:10px;flex:none;}
+  .btn{
+    font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.08em;font-weight:700;
+    border:2px solid var(--ink);background:var(--surface);color:var(--ink);
+    padding:10px 14px;cursor:pointer;box-shadow:3px 3px 0 var(--shadow);
+    transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--shadow);}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow);}
+  .btn.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:22px;margin-top:36px;}
+  .card{
+    border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);
+    display:flex;flex-direction:column;overflow:hidden;background:var(--surface);
+  }
+  .stage{
+    flex:1;display:flex;align-items:flex-end;justify-content:center;
+    min-height:300px;padding:26px 18px 22px;position:relative;cursor:pointer;
+    overflow:hidden;user-select:none;background:var(--surface-2);
+    transition:background .3s ease;
+  }
+  .stage:focus-visible{outline:3px solid var(--accent);outline-offset:-3px;}
+  .tag{position:absolute;top:12px;left:12px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;color:var(--accent-ink);background:var(--accent-soft);padding:4px 9px;z-index:5;}
+  .hint{position:absolute;bottom:10px;right:12px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);z-index:5;opacity:.85;}
+  .meta{border-top:2px solid var(--ink);padding:14px 16px;background:var(--surface);}
+  .pose{font-family:'Pixelify Sans',sans-serif;font-size:21px;line-height:1;margin:0 0 5px;color:var(--ink);}
+  .use{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0;}
+
+  .sprite{image-rendering:pixelated;display:grid;position:relative;z-index:3;}
+  .float{position:absolute;font-family:'Pixelify Sans',sans-serif;font-weight:700;pointer-events:none;z-index:6;}
+  .footer-note{margin-top:60px;border-top:2px dashed var(--border);padding-top:22px;font-size:13.5px;color:var(--muted);line-height:1.7;max-width:760px;}
+  .footer-note b{color:var(--ink-soft);}
+
+  /* effect keyframes */
+  @keyframes flashPop{0%{opacity:0}8%{opacity:.95}100%{opacity:0}}
+  @keyframes floatUp{0%{opacity:0;transform:translateY(6px) scale(.7)}15%{opacity:1}100%{opacity:0;transform:translateY(-46px) scale(1.1)}}
+  @keyframes polaroidOut{0%{opacity:0;transform:translateY(-8px) rotate(-4deg) scale(.6)}30%{opacity:1}100%{opacity:1;transform:translateY(34px) rotate(4deg) scale(1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+  @keyframes ballKick{0%{opacity:0;transform:translate(0,0) scale(.6)}10%{opacity:1}100%{opacity:1;transform:translate(120px,-70px) scale(1)}}
+  @keyframes goalPop{0%{opacity:0;transform:scale(.4)}25%{opacity:1;transform:scale(1.15)}80%{opacity:1;transform:scale(1)}100%{opacity:0}}
+  @keyframes screenFlicker{0%,100%{opacity:.55}50%{opacity:.95}}
+  @keyframes shimmer{0%{opacity:0;transform:scale(.4) rotate(0)}40%{opacity:1}100%{opacity:0;transform:scale(1.3) rotate(40deg)}}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <div class="kicker"><span></span><b>MASCOT · INTERACTIVE</b></div>
+      <h1>Tung — mascot bấm vào được</h1>
+      <p class="lead">Bộ mascot mới, mỗi cái <b>click vào ra một hiệu ứng riêng</b> theo sở thích. Vẫn đúng nhân vật Tung, vẽ ở góc 3/4 cho sống động hơn.</p>
+      <p class="note">Bấm <b>Dark</b> để xem phiên bản tối của từng mascot. Bấm <b>Âm thanh</b> để bật/tắt tiếng 8-bit. Đây là bản nháp để bạn duyệt — OK cái nào mình mới gắn vào web.</p>
+    </div>
+    <div class="controls">
+      <button class="btn" id="soundBtn">🔇 ÂM THANH: TẮT</button>
+      <button class="btn" id="themeBtn">🌙 DARK</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="footer-note">
+    <b>Cách hoạt động:</b> click (hoặc Enter khi focus) vào từng mascot để kích hoạt. Máy ảnh → flash + ảnh polaroid in ra. Âm nhạc → phát chiptune 8-bit + nốt nhạc bay (click lần nữa để dừng). Game → màn hình hắt sáng đổi màu lên mặt + bấm nút. Mô hình → robot bật nguồn, mắt sáng + beep. Bóng đá → sút banh + "GOAL!".
+  </p>
+</div>
+
+<script>
+/* ============================================================
+   PALETTE — character colors fixed to keep identity
+   ============================================================ */
+const PAL = {
+  ".":"transparent",
+  "K":"#241f1b", // hair / outline / eyes
+  "F":"#e6b289", // skin
+  "f":"#d49a73", // skin shade (3/4 side)
+  "A":"#cc6b4e", // orange sleeve / accent
+  "W":"#fbf2ef", // shirt white
+  "w":"#e9ded9", // shirt shade
+  "G":"#5b5750", // gray device body
+  "M":"#9a948c", // light mech gray (robot body)
+  "D":"#1a1815", // near-black
+  "B":"#2b3640", // dark glass
+  "H":"#a8c0cc", // light glass / shine
+  "V":"#7ad6ff", // cyan visor (robot eyes)
+  "S":"#5e89ad", // blue
+  "P":"#857f77", // headphone band (silver, pops over dark hair)
+  "g":"#7fae5e", // green (model accent)
+  "r":"#cf5b50", // red (ball / nub)
+  "y":"#e8c14a", // yellow (robot V-fin)
+  "j":"#cf1124", // Portugal jersey red
+  "n":"#0a7d3f"  // Portugal green trim
+};
+
+/* ============================================================
+   CHIPTUNE ENGINE (Web Audio) — simple square-wave melodies
+   ============================================================ */
+const Chip = (()=>{
+  let ctx=null, enabled=false, loopTimer=null, master=null;
+  function ensure(){
+    if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)();
+      master=ctx.createGain(); master.gain.value=0.16; master.connect(ctx.destination); }
+    if(ctx.state==='suspended') ctx.resume();
+  }
+  function setEnabled(v){ enabled=v; if(!v) stopLoop(); }
+  function isEnabled(){ return enabled; }
+  // one note
+  function note(freq,start,dur,type='square',vol=1){
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type=type; o.frequency.value=freq;
+    g.gain.setValueAtTime(0,start);
+    g.gain.linearRampToValueAtTime(vol,start+0.01);
+    g.gain.setValueAtTime(vol,start+dur*0.7);
+    g.gain.linearRampToValueAtTime(0,start+dur);
+    o.connect(g); g.connect(master); o.start(start); o.stop(start+dur+0.02);
+  }
+  const N={C4:261.63,D4:293.66,E4:329.63,F4:349.23,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25,G5:783.99,A5:880};
+  // short sfx
+  function sfx(kind){
+    if(!enabled) return; ensure(); const t=ctx.currentTime;
+    if(kind==='shutter'){ note(1400,t,0.04,'square',0.9); note(700,t+0.05,0.06,'square',0.7); }
+    else if(kind==='beep'){ note(N.C5,t,0.08); note(N.E5,t+0.09,0.08); note(N.G5,t+0.18,0.12); }
+    else if(kind==='blip'){ note(N.A4,t,0.05,'square',0.8); note(N.E5,t+0.05,0.05,'square',0.8); }
+    else if(kind==='whistle'){ note(N.G5,t,0.05,'triangle',0.8); note(N.C5,t+0.06,0.18,'triangle',0.8); }
+    else if(kind==='goal'){ [N.C5,N.E5,N.G5,N.C5].forEach((f,i)=>note(f,t+i*0.1,0.12)); note(N.G5,t+0.45,0.25,'square',0.9); }
+  }
+  // looping melody for music mascot
+  function startLoop(){
+    if(!enabled) return; ensure(); stopLoop();
+    const mel=[N.E4,N.G4,N.A4,N.G4,N.E4,N.D4,N.C4,N.D4, N.E4,N.G4,N.C5,N.B4,N.A4,N.G4,N.E4,N.D4];
+    let i=0;
+    const step=()=>{
+      if(!enabled){ stopLoop(); return; }
+      const t=ctx.currentTime;
+      note(mel[i%mel.length],t,0.16,'square',0.9);
+      note(mel[i%mel.length]/2,t,0.18,'triangle',0.5); // bass
+      i++; loopTimer=setTimeout(step,200);
+    };
+    step();
+  }
+  function stopLoop(){ if(loopTimer){ clearTimeout(loopTimer); loopTimer=null; } }
+  function loopActive(){ return !!loopTimer; }
+  return {ensure,setEnabled,isEnabled,sfx,startLoop,stopLoop,loopActive};
+})();
+
+/* ============================================================
+   SPRITE RENDERER
+   ============================================================ */
+function renderSprite(grid, scale){
+  const rows=grid.length, cols=grid[0].length;
+  const el=document.createElement('div');
+  el.className='sprite';
+  el.style.gridTemplateColumns=`repeat(${cols},${scale}px)`;
+  el.style.gridTemplateRows=`repeat(${rows},${scale}px)`;
+  el.style.width=cols*scale+'px'; el.style.height=rows*scale+'px';
+  grid.forEach(line=>{
+    for(const ch of line){
+      const d=document.createElement('div');
+      d.style.width=scale+'px'; d.style.height=scale+'px';
+      d.style.background=PAL[ch]||'transparent';
+      el.appendChild(d);
+    }
+  });
+  return el;
+}
+
+/* ============================================================
+   MASCOTS — sprite (light+dark share grid; colors via tokens),
+   each with an interaction handler.
+   ============================================================ */
+const MASCOTS = {};
+
+/* ---------- CAMERA (3/4, looking right through viewfinder) ---------- */
+MASCOTS.camera = {
+  label:"Chụp ảnh", use:"Click → flash loé + ảnh polaroid in ra.",
+  hint:"click để chụp",
+  grid:[
+  "...KKKKKKKK.....",
+  "..KKKKKKKKKK....",
+  ".KKKKKKKKKKKK...",
+  ".KKKKKKKKKKKKK..",
+  ".KKKKKKfFFFKKK..",
+  ".KKKKfFFFFFFKK..",
+  ".KKKfFFFFFFFFK..",
+  ".KKfFFKFFFFKFK..",
+  ".KKfFFFFFFFFFK..",
+  ".KKfFFFFKKFFFK..",
+  "..KKfFFFFFFFK...",
+  "...KfFFFFFFK....",
+  "..KAAAWGGGWAAK..",
+  ".KFFWGGDDGGWFFK.",
+  ".KFFWGDHBDGGFFK.",
+  ".KFFWGDBBDGGFFK.",
+  ".KFFWGGDDGGWFFK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ],
+  effect(stage){
+    Chip.sfx('shutter');
+    const flash=document.createElement('div');
+    flash.style.cssText='position:absolute;inset:0;background:#fff;z-index:8;pointer-events:none;animation:flashPop .5s ease-out forwards;';
+    stage.appendChild(flash);
+    const pol=document.createElement('div');
+    pol.style.cssText='position:absolute;left:50%;top:46%;width:46px;height:54px;margin-left:-23px;background:#fff;border:3px solid #241f1b;z-index:7;pointer-events:none;box-shadow:3px 3px 0 rgba(0,0,0,.25);animation:polaroidOut 1s ease-out forwards;';
+    pol.innerHTML='<div style="position:absolute;inset:4px 4px 14px 4px;background:linear-gradient(135deg,#cc6b4e,#5e89ad);"></div>';
+    stage.appendChild(pol);
+    setTimeout(()=>{flash.remove();},520);
+    setTimeout(()=>{pol.remove();},1700);
+  }
+};
+
+/* ---------- MUSIC (3/4, headphones, head bob) ---------- */
+MASCOTS.music = {
+  label:"Nghe nhạc", use:"Click → phát chiptune 8-bit + nốt bay. Click lần nữa để dừng.",
+  hint:"click để bật nhạc",
+  bob:true,
+  grid:[
+  "...PPPPPPPPPP...",
+  "..PKKKKKKKKKKP..",
+  ".PKKKKKKKKKKKKP.",
+  ".PKKKKKKKKKKKKP.",
+  ".PKKKKKFFFKKKKP.",
+  "PPKKKFFFFFFFKKPP",
+  "PAKKFFFFFFFFFKAP",
+  "PAKFFKFFFFKFFKAP",
+  "PAKFFFFFFFFFFKAP",
+  "PPKFFFFKKFFFFKPP",
+  "..KKFFFFFFFFKK..",
+  "...KFFFFFFFFK...",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ],
+  effect(stage, card){
+    if(Chip.loopActive()){
+      Chip.stopLoop();
+      const s=card.querySelector('.sprite'); if(s) s.style.animation='';
+      card._noteTimer && clearInterval(card._noteTimer); card._noteTimer=null;
+      return;
+    }
+    Chip.startLoop();
+    const s=card.querySelector('.sprite');
+    if(s) s.style.animation='bob .4s ease-in-out infinite';
+    const spawn=()=>{
+      const n=document.createElement('div');
+      n.className='float';
+      n.textContent=Math.random()>.5?'♪':'♫';
+      n.style.color='var(--accent)';
+      n.style.fontSize=(16+Math.random()*12)+'px';
+      n.style.left=(40+Math.random()*120)+'px';
+      n.style.bottom='120px';
+      n.style.animation='floatUp 1.3s ease-out forwards';
+      stage.appendChild(n);
+      setTimeout(()=>n.remove(),1300);
+    };
+    spawn();
+    card._noteTimer=setInterval(spawn,360);
+  }
+};
+
+/* ---------- GAMING (looking down at handheld; screen glows on face) ---------- */
+MASCOTS.gaming = {
+  label:"Chơi game", use:"Click → màn hình hắt sáng đổi màu lên mặt + bấm nút lia lịa.",
+  hint:"click để chơi",
+  grid:[
+  "...KKKKKKKK.....",
+  "..KKKKKKKKKK....",
+  ".KKKKKKKKKKKK...",
+  ".KKKKKKKKKKKK...",
+  ".KKKKKFFFKKKK...",
+  ".KKKFFFFFFFKK...",
+  ".KKFFFFFFFFFK...",
+  ".KFFKFFFFKFFK...",
+  ".KFFFFFFFFFFK...",
+  ".KFFFFKKFFFFK...",
+  "..KFFFFFFFFK....",
+  "...KFFFFFFK.....",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KFFGGGGGGGGFFK.",
+  ".KFFGSSSSSSGGFK.",
+  ".KFFGSSSSSSGAFK.",
+  ".KFFGGKGGGAGGFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ],
+  effect(stage, card){
+    Chip.sfx('blip');
+    // colored screen glow hitting the face
+    const glow=document.createElement('div');
+    glow.style.cssText='position:absolute;left:50%;bottom:60px;width:120px;height:120px;margin-left:-60px;border-radius:50%;mix-blend-mode:screen;z-index:4;pointer-events:none;filter:blur(8px);animation:screenFlicker .18s steps(2) 8;';
+    stage.appendChild(glow);
+    const colors=['#5e89ad','#cc6b4e','#7fae5e','#b86fb0'];
+    let i=0;
+    const cyc=setInterval(()=>{ glow.style.background=colors[i%colors.length]; i++; Chip.sfx('blip'); },180);
+    setTimeout(()=>{ clearInterval(cyc); glow.remove(); },1500);
+  }
+};
+
+/* ---------- MODEL (holds up a Gundam-style robot figure) ---------- */
+MASCOTS.model = {
+  label:"Chơi mô hình", use:"Click → robot bật nguồn, mắt sáng + beep.",
+  hint:"click để bật robot",
+  grid:[
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKFFFKKKK..",
+  "..KKKFFFFFFFKK..",
+  "..KKFFFFFFFFFK..",
+  "..KFFKFFFFKFFK..",
+  "..KFFFFFFFFFFK..",
+  "..KFFFFKKFFFFK..",
+  "...KFFFFFFFFK...",
+  "....KFFFFFFK....",
+  "..KAAAyAAyKAAK..",
+  ".KAAAWDDDDWAAAK.",
+  ".KAAWDMMMMDWWAK.",
+  ".KFFWDVVVVDWFFK.",
+  ".KFFWDMMMMDWFFK.",
+  ".KFFWWDMMDWWFFK.",
+  "..KWWWDMMDWWWK..",
+  "..KKKKDMMDKKKK..",
+  "..KKKKK..KKKKK..",
+  ],
+  effect(stage, card){
+    Chip.sfx('beep');
+    // robot visor lights up (center-front of chest)
+    const glow=document.createElement('div');
+    glow.style.cssText='position:absolute;left:50%;bottom:104px;width:42px;height:11px;margin-left:-21px;z-index:7;pointer-events:none;background:#7ad6ff;border-radius:2px;box-shadow:0 0 12px 4px #7ad6ff;animation:screenFlicker .16s steps(2) 8;';
+    stage.appendChild(glow);
+    for(let k=0;k<4;k++){
+      const sp=document.createElement('div');
+      sp.className='float'; sp.textContent='✦'; sp.style.color='#7ad6ff';
+      sp.style.fontSize=(12+k*2)+'px';
+      sp.style.left=(92+k*16)+'px'; sp.style.bottom=(118+k*7)+'px';
+      sp.style.animation='shimmer 1s ease-out forwards'; sp.style.animationDelay=(k*0.12)+'s';
+      stage.appendChild(sp); setTimeout(()=>sp.remove(),1200);
+    }
+    setTimeout(()=>glow.remove(),1400);
+  }
+};
+
+/* ---------- FOOTBALL (Portugal #7 jersey; click → turn around, point at number) ---------- */
+MASCOTS.football = {
+  label:"Đá banh", use:"Click → quay lưng khoe áo số 7 Bồ Đào Nha (CR7).",
+  hint:"click để xoay lưng",
+  grid:[
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKFFFKKKK..",
+  "..KKKFFFFFFFKK..",
+  "..KKFFFFFFFFFK..",
+  "..KFFKFFFFKFFK..",
+  "..KFFFFFFFFFFK..",
+  "..KFFFFKKFFFFK..",
+  "...KFFFFFFFFK...",
+  "....KFFFFFFK....",
+  "..KjjjjnnjjjjK..",
+  ".KjjjjjnnjjjjjK.",
+  ".KjjjjjjjjjjjjK.",
+  ".KFFjjjjjjyjFFK.",
+  ".KFFjjjjjjjjFFK.",
+  ".KFFjjjjjjjjFFK.",
+  "..KjjjjjjjjjjK..",
+  "..KnnnnnnnnnnK..",
+  "..KKKKK..KKKKK..",
+  ],
+  backGrid:[
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "...KKKKKKKKKK...",
+  "....KFFFFFFK....",
+  "..KjjjjjjjjjjK..",
+  "..KFjjWWWWjjFK..",
+  ".KFjjjjjjWjjjFK.",
+  "KFjjjjjjWjjjjjFK",
+  "KFjjjjjWjjjjjjFK",
+  "..KjjjjjjjjjjK..",
+  "..KnnnnnnnnnnK..",
+  "..KnnnnnnnnnnK..",
+  "..KKKKK..KKKKK..",
+  ],
+  effect(stage, card){
+    if(card._busy) return; card._busy=true;
+    Chip.sfx('whistle');
+    const sp=card.querySelector('.sprite');
+    sp.style.transition='transform .22s ease-in';
+    sp.style.transformOrigin='50% 60%';
+    sp.style.transform='scaleX(0.05)';
+    card._back=!card._back;
+    setTimeout(()=>{
+      const fresh=renderSprite(card._back?MASCOTS.football.backGrid:MASCOTS.football.grid, SCALE);
+      fresh.style.transform='scaleX(0.05)'; fresh.style.transformOrigin='50% 60%';
+      sp.replaceWith(fresh);
+      requestAnimationFrame(()=>{
+        fresh.style.transition='transform .22s ease-out';
+        fresh.style.transform='scaleX(1)';
+      });
+      if(card._back){
+        Chip.sfx('goal');
+        const g=document.createElement('div'); g.className='float'; g.textContent='SIUUU!';
+        g.style.cssText='left:50%;top:22%;transform:translateX(-50%);color:var(--accent);font-size:26px;animation:goalPop 1.2s ease-out forwards;text-shadow:2px 2px 0 var(--shadow);white-space:nowrap;';
+        stage.appendChild(g); setTimeout(()=>g.remove(),1200);
+      }
+      setTimeout(()=>{card._busy=false;},240);
+    },220);
+  }
+};
+
+/* ============================================================
+   BUILD CARDS
+   ============================================================ */
+const ORDER=["camera","music","gaming","model","football"];
+const SCALE=13;
+const grid=document.getElementById('grid');
+
+ORDER.forEach(key=>{
+  const m=MASCOTS[key];
+  const card=document.createElement('div'); card.className='card';
+  const stage=document.createElement('div'); stage.className='stage'; stage.tabIndex=0; stage.setAttribute('role','button');
+  stage.setAttribute('aria-label',m.label+' — '+m.hint);
+  const tag=document.createElement('div'); tag.className='tag'; tag.textContent=key; stage.appendChild(tag);
+  const hint=document.createElement('div'); hint.className='hint'; hint.textContent='▸ '+m.hint; stage.appendChild(hint);
+  stage.appendChild(renderSprite(m.grid,SCALE));
+  const meta=document.createElement('div'); meta.className='meta';
+  meta.innerHTML=`<p class="pose">${m.label}</p><p class="use">${m.use}</p>`;
+  const fire=()=>{ Chip.ensure(); m.effect(stage,card); };
+  stage.addEventListener('click',fire);
+  stage.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fire(); }});
+  card.appendChild(stage); card.appendChild(meta); grid.appendChild(card);
+});
+
+/* ---- controls ---- */
+const soundBtn=document.getElementById('soundBtn');
+soundBtn.addEventListener('click',()=>{
+  const on=!Chip.isEnabled(); Chip.setEnabled(on);
+  if(on) Chip.ensure();
+  soundBtn.textContent= on ? '🔊 ÂM THANH: BẬT' : '🔇 ÂM THANH: TẮT';
+  soundBtn.classList.toggle('on',on);
+});
+const themeBtn=document.getElementById('themeBtn');
+themeBtn.addEventListener('click',()=>{
+  const dark=document.body.classList.toggle('dark');
+  themeBtn.textContent= dark ? '☀️ LIGHT' : '🌙 DARK';
+  themeBtn.classList.toggle('on',dark);
+});
+</script>
+</body>
+</html>

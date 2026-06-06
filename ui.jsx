@@ -31,6 +31,21 @@ const SPRITES = {
     ".OAWOWOAO.", ".OAWOWOAO.", ".OAAAAAAO.", ".OOAAAAOO.",
     "OSO.OO.OSO", "OSOOAAOOSO", "..OO..OO..", "..OO..OO.."]
   },
+  music: { palette: PAL, grid: [
+    "....OOOO....", "...OAAAAO...", "..OAWWAAO..", ".OAWWWWAO.",
+    ".OAAWWAAO.", ".OOAAAAOO.", "..OAAAAO..", ".OOOAAOOO.",
+    "O.SOAAOS.O", "O.SOAAOS.O", "...O..O...", "...O..O..."]
+  },
+  football: { palette: PAL, grid: [
+    "...OOOO.....", "..OAAAAO....", ".OAWWAAO....", ".OAAAAAO....",
+    "..OAAAAOO...", "...OOOOAO...", "..OOAAAO....", ".OAAAOO.....",
+    ".OAAO..OOO..", "..OO..OAWAO.", ".....OAAAAO", "......OOOO."]
+  },
+  model: { palette: PAL, grid: [
+    "....OOO.....", "...OAAAO....", "..OAWWAO....", "..OAAAO.....",
+    "...OOO..OO..", "..OOAAOOAAO.", ".OAAAAAAOO..", ".OAOSSAAO...",
+    "..OOAAOO....", "...O..O.....", "..OO..OO....", ".OS....SO..."]
+  },
   // "?" tile — for unnamed / coming-soon apps
   question: { palette: PAL, grid: [
     "..OOOOOOOO..", ".OWWWWWWWWO.", "OWWAAAAAAWWO", "OWAAWWWWAAWO",
@@ -262,7 +277,7 @@ function Header({ locale, setLocale, t, onNav, route, theme, toggleTheme }) {
           <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
             <NavLink active={false} onClick={() => onNav("home", "apps")}>{t.nav.apps}</NavLink>
-            <NavLink active={false} onClick={() => onNav("home", "about")}>{t.nav.about}</NavLink>
+            <NavLink active={route === "about-me"} onClick={() => onNav("about-me")}>{t.nav.aboutMe}</NavLink>
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             <LangSwitch locale={locale} setLocale={setLocale} />
           </nav>
@@ -323,6 +338,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
             </FooterCol>
             <FooterCol title="Links">
               <FooterLink href="https://github.com/tung78952">{t.footer.github}</FooterLink>
+              <FooterLink onClick={() => onNav("about-me")}>{t.nav.aboutMe}</FooterLink>
               <FooterLink onClick={() => onNav("home", "about")}>{t.nav.about}</FooterLink>
             </FooterCol>
           </div>

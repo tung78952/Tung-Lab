@@ -8,8 +8,8 @@ const FPHOTO_RELEASE_API = "https://api.github.com/repos/tung78952/FPhoto/releas
 // ---- UI chrome strings (nav, buttons, labels) ----
 const STRINGS = {
   vi: {
-    nav: { home: "Trang chủ", apps: "Ứng dụng", about: "Giới thiệu" },
-    cta: { details: "Xem chi tiết", download: "Tải xuống", downloadWin: "Tải cho Windows", back: "Quay lại" },
+    nav: { home: "Trang chủ", apps: "Ứng dụng", about: "Giới thiệu", aboutMe: "Về tôi" },
+    cta: { details: "Xem chi tiết", download: "Tải xuống", downloadWin: "Tải cho Windows", back: "Quay lại", aboutMe: "Xem About Me", contact: "Liên hệ" },
     status: { available: "Đang có", "coming-soon": "Sắp ra mắt", beta: "Beta", "not-planned": "Chưa hỗ trợ" },
     hero: {
       kicker: "MINI PRODUCT LAB",
@@ -25,11 +25,11 @@ const STRINGS = {
     detail: { version: "Phiên bản", released: "Ngày phát hành", file: "Tên file", minos: "Hệ điều hành tối thiểu", size: "Dung lượng", releaseNotes: "Trang phát hành trên GitHub", step: "Bước" },
     footerCta: { title: "Cần lọc ảnh nhanh hơn?", desc: "Tải FPhoto và thử ngay trong vài phút.", btn: "Tải FPhoto cho Windows" },
     footer: { blurb: "Các app nhỏ do Tùng tự làm. Tải trực tiếp, dùng ngay.", github: "GitHub", copyright: "© 2026 Tung Lab. Apps built by Tung." },
-    about: { title: "Về Tung Lab", body: "Tung Lab là không gian cá nhân để mình gom các app tự làm về một chỗ — mỗi cái giải một bài toán cụ thể trong công việc. Không backend, không tài khoản, không thu thập dữ liệu. Bạn thấy app hữu ích thì tải về dùng." },
+    about: { title: "Về Tung Lab", body: "Tung Lab là không gian cá nhân để mình gom các app tự làm về một chỗ — mỗi cái giải một bài toán cụ thể trong công việc. Không backend, không tài khoản, không thu thập dữ liệu. Bạn thấy app hữu ích thì tải về dùng.", ctaTitle: "Muốn biết người đứng sau Tung Lab?", ctaDesc: "Mình có một trang About Me riêng: dự án, kỹ năng, cách mình học bằng project thật và một vài sở thích ngoài code." },
   },
   en: {
-    nav: { home: "Home", apps: "Apps", about: "About" },
-    cta: { details: "View details", download: "Download", downloadWin: "Download for Windows", back: "Back" },
+    nav: { home: "Home", apps: "Apps", about: "About", aboutMe: "About Me" },
+    cta: { details: "View details", download: "Download", downloadWin: "Download for Windows", back: "Back", aboutMe: "View About Me", contact: "Contact" },
     status: { available: "Available", "coming-soon": "Coming soon", beta: "Beta", "not-planned": "Not supported" },
     hero: {
       kicker: "MINI PRODUCT LAB",
@@ -45,7 +45,7 @@ const STRINGS = {
     detail: { version: "Version", released: "Released", file: "File name", minos: "Minimum OS", size: "Size", releaseNotes: "GitHub release page", step: "Step" },
     footerCta: { title: "Need to cull photos faster?", desc: "Grab FPhoto and try it in minutes.", btn: "Download FPhoto for Windows" },
     footer: { blurb: "Small apps built by Tung. Direct downloads, ready to use.", github: "GitHub", copyright: "© 2026 Tung Lab. Apps built by Tung." },
-    about: { title: "About Tung Lab", body: "Tung Lab is a personal space where I collect the apps I build — each one solving a specific job at work. No backend, no accounts, no data collection. If an app helps, just download and use it." },
+    about: { title: "About Tung Lab", body: "Tung Lab is a personal space where I collect the apps I build — each one solving a specific job at work. No backend, no accounts, no data collection. If an app helps, just download and use it.", ctaTitle: "Want to meet the person behind Tung Lab?", ctaDesc: "I made a separate About Me page for projects, skills, how I learn by building real things, and a few interests outside code." },
   },
 };
 
@@ -155,4 +155,77 @@ const ACCENTS = {
   lime: { base: "#b6713f", soft: "var(--accent-soft)", ink: "#6a3f1d" },
 };
 
-Object.assign(window, { STRINGS, APPS, ACCENTS, FPHOTO_URL, FPHOTO_RELEASE, FPHOTO_RELEASE_API });
+const PORTFOLIO = {
+  vi: {
+    hero: {
+      kicker: "STUDENT DEVELOPER",
+      title: "Xin chào, mình là Tùng",
+      subtitle: "Sinh viên năm 3 ngành Công nghệ Thông tin tại UIT - VNUHCM, đang học cách biến ý tưởng thành sản phẩm chạy được bằng code, sự tò mò và AI-assisted workflows.",
+      status: "Learning by building practical projects."
+    },
+    about: {
+      title: "Mình đang học bằng cách làm thật",
+      body: "Mình là Trần Phan Thanh Tùng, một sinh viên IT đang tìm hiểu Software Engineering qua đồ án ở trường, project cá nhân và những lần tự mày mò sửa lỗi. Mình thích cảm giác một ý tưởng ban đầu dần biến thành một sản phẩm có thể chạy, test, deploy và cải thiện được. Hiện mình quan tâm đến web app, backend, database, testing, deployment và cách dùng AI tools để hiểu project nhanh hơn, làm việc có hệ thống hơn."
+    },
+    projectsTitle: "Featured Projects",
+    projectsSub: "Một vài project mình đã học được nhiều nhất từ đó.",
+    skillsTitle: "Skills & Tools",
+    aiTitle: "AI-assisted Workflow",
+    aiBody: "Mình dùng AI như một công cụ hỗ trợ học tập và phát triển: đọc hiểu codebase, chia task, lên checklist, debug, refactor nhỏ, viết tài liệu và kiểm tra lại luồng hoạt động. Phần quan trọng vẫn là mình phải hiểu yêu cầu, kiểm tra kết quả, chỉnh sửa và chịu trách nhiệm với sản phẩm cuối cùng.",
+    interestsTitle: "Outside Coding",
+    interestsSub: "Một vài thứ giữ cho mình có năng lượng và gu riêng ngoài màn hình code.",
+    contactTitle: "Contact",
+    contactSub: "Nếu bạn muốn xem thêm project hoặc trao đổi cơ hội học hỏi/làm việc, cứ ghé qua các link này.",
+    buttons: { projects: "Xem Projects", github: "GitHub", contact: "Contact" }
+  },
+  en: {
+    hero: {
+      kicker: "STUDENT DEVELOPER",
+      title: "Hi, I'm Tung",
+      subtitle: "Third-year IT student at UIT - VNUHCM, learning to turn ideas into working software with code, curiosity, and AI-assisted workflows.",
+      status: "Learning by building practical projects."
+    },
+    about: {
+      title: "I learn by building real things",
+      body: "I'm Tran Phan Thanh Tung, an IT student exploring Software Engineering through school projects, personal products, and a lot of hands-on debugging. I like the moment when an early idea slowly becomes something that can run, be tested, deployed, and improved. Right now, I'm interested in web apps, backend systems, databases, testing, deployment, and using AI tools to understand projects faster and work more deliberately."
+    },
+    projectsTitle: "Featured Projects",
+    projectsSub: "A few projects that taught me the most.",
+    skillsTitle: "Skills & Tools",
+    aiTitle: "AI-assisted Workflow",
+    aiBody: "I use AI as a learning and development companion: to understand codebases, break tasks down, make checklists, debug, do small refactors, write documentation, and re-check how a flow behaves. The important part is still mine: understanding the requirement, validating the result, editing carefully, and taking responsibility for the final product.",
+    interestsTitle: "Outside Coding",
+    interestsSub: "A few things that keep my energy and taste alive outside the code editor.",
+    contactTitle: "Contact",
+    contactSub: "If you want to see more projects or talk about learning/work opportunities, these are the best places to find me.",
+    buttons: { projects: "View Projects", github: "GitHub", contact: "Contact" }
+  },
+  projects: [
+    { name: "BikeStore Management System", tags: ["FastAPI", "ReactJS", "PostgreSQL", "SQLAlchemy", "JWT", "Tailwind CSS", "Docker"], vi: "Full-stack web app quản lý cửa hàng xe đạp: sản phẩm, khách hàng, nhân viên, đơn hàng, tồn kho, doanh thu, đăng nhập và phân quyền.", en: "A full-stack web app for bicycle store management: products, customers, staff, orders, inventory, sales, authentication, and role-based access." },
+    { name: "SE104 Exam Generation and Grading Management System", tags: ["NextJS", "ReactJS", "TypeScript", "NestJS", "Prisma", "MySQL", "Docker", "JWT"], vi: "Project môn Nhập môn Công nghệ Phần mềm, hỗ trợ quản lý ngân hàng câu hỏi, tạo đề, chấm điểm, báo cáo và phân quyền Admin/Lecturer.", en: "A Software Engineering course project for question banks, exam generation, grading, reports, and Admin/Lecturer permissions." },
+    { name: "FPhoto", tags: ["Electron", "TypeScript", "SQLite", "HTML", "CSS"], vi: "Windows desktop app giúp photographer lọc, tìm kiếm, preview và copy ảnh nhanh hơn sau buổi chụp. Project xuất phát từ nhu cầu thật khi phải chọn ảnh thủ công.", en: "A Windows desktop app that helps photographers filter, search, preview, and copy photos faster after a shoot. It came from a real workflow problem." }
+  ],
+  skills: [
+    { group: "Programming", items: ["Python", "C++", "SQL", "JavaScript", "HTML", "CSS"] },
+    { group: "Backend", items: ["FastAPI", "ExpressJS", "RESTful API", "JWT Authentication"] },
+    { group: "Frontend", items: ["ReactJS", "NextJS", "Basic Full-stack Development"] },
+    { group: "Database", items: ["PostgreSQL", "MySQL", "SQLAlchemy", "Prisma"] },
+    { group: "Tools", items: ["Git", "GitHub", "Docker", "Linux", "VS Code", "Vercel"] },
+    { group: "AI-assisted Development", items: ["Claude Code", "OpenCode", "GitHub Copilot", "Codex", "ChatGPT"] }
+  ],
+  interests: [
+    { id: "gaming", title: "Gaming", sprite: "bot", vi: "Game cho mình chiến thuật, phản xạ, teamwork và problem-solving.", en: "Games give me strategy, reflexes, teamwork, and problem-solving." },
+    { id: "music", title: "Music", sprite: "music", vi: "Mình nghe nhạc để thư giãn và giữ nhịp làm việc.", en: "Music helps me relax and keep a steady working rhythm." },
+    { id: "photography", title: "Photography", sprite: "camera", vi: "Mình thích bố cục, màu sắc và lưu lại khoảnh khắc. Sở thích này cũng dẫn tới FPhoto.", en: "I like composition, color, and capturing moments. This interest also led to FPhoto." },
+    { id: "football", title: "Football", sprite: "football", vi: "Bóng đá có tính đồng đội, năng lượng và những pha xử lý rất đời.", en: "Football has teamwork, energy, and very human split-second decisions." },
+    { id: "models", title: "Model kits", sprite: "model", vi: "Mô hình dạy mình kiên nhẫn với chi tiết và cảm giác tự tay hoàn thiện một thứ.", en: "Model kits teach patience with detail and the satisfaction of finishing something by hand." }
+  ],
+  contact: [
+    { label: "GitHub", href: "https://github.com/tung78952" },
+    { label: "Email", href: "mailto:iamtptt2005@gmail.com" },
+    { label: "Facebook", href: "https://www.facebook.com/takumi.minamino.104" },
+    { label: "TikTok", href: "https://www.tiktok.com/@iamtptt05" }
+  ]
+};
+
+Object.assign(window, { STRINGS, APPS, ACCENTS, PORTFOLIO, FPHOTO_URL, FPHOTO_RELEASE, FPHOTO_RELEASE_API });

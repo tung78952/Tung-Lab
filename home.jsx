@@ -45,7 +45,7 @@ function HeroSplit({ t, onNav, pixel, theme }) {
           </div>
           <HeroStats t={t} />
         </div>
-        <MascotScene theme={theme} />
+        <MascotScene theme={theme} onClick={() => onNav("about-me")} />
       </div>
       <PixelEdge color="var(--accent)" align="content" />
     </section>
@@ -111,10 +111,10 @@ function FloatCartridge({ sprite, style, label, big, onClick }) {
   );
 }
 
-function MascotScene({ theme }) {
+function MascotScene({ theme, onClick }) {
   const asleep = theme === "dark";
   return (
-    <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+    <button aria-label="Open About Me" onClick={onClick} style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", background: "none", border: "none", padding: 0, cursor: "pointer" }}>
       <div className="hero-mascot-frame" style={{ position: "relative", width: 380, height: 380 }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 45%, var(--accent-soft), transparent 65%)" }} />
         {asleep ? (
@@ -143,7 +143,7 @@ function MascotScene({ theme }) {
           <div style={{ width: 180, height: 12, background: "var(--accent)", opacity: 0.6 }} />
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 function CornerPixels() {
@@ -296,7 +296,7 @@ function SectionHead({ kicker, title, sub, light }) {
   );
 }
 
-function About({ t, theme }) {
+function About({ t, theme, onNav }) {
   const isDark = theme === "dark";
   return (
     <section id="about" style={{ background: "var(--band)", color: "var(--band-ink)", position: "relative" }}>
@@ -323,6 +323,11 @@ function About({ t, theme }) {
         <div>
           <SectionHead kicker="ABOUT" title={t.about.title} light />
           <p style={{ fontSize: 18, color: "var(--band-muted)", lineHeight: 1.7, margin: "18px 0 0", maxWidth: 540 }}>{t.about.body}</p>
+          <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--band-border)" }}>
+            <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 28, color: "var(--band-ink)", margin: "0 0 10px" }}>{t.about.ctaTitle}</h3>
+            <p style={{ fontSize: 15.5, color: "var(--band-muted)", lineHeight: 1.65, margin: "0 0 18px", maxWidth: 560 }}>{t.about.ctaDesc}</p>
+            <Btn variant="ghost" onClick={() => onNav("about-me")}>{t.cta.aboutMe}</Btn>
+          </div>
         </div>
       </div>
     </section>
@@ -334,7 +339,7 @@ function Home({ heroVariant, cardVariant, locale, t, onNav, pixel, theme }) {
     <main>
       <Hero variant={heroVariant} t={t} onNav={onNav} pixel={pixel} theme={theme} />
       <Gallery apps={APPS} cardVariant={cardVariant} locale={locale} t={t} onNav={onNav} />
-      <About t={t} theme={theme} />
+      <About t={t} theme={theme} onNav={onNav} />
     </main>
   );
 }
