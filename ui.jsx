@@ -54,6 +54,16 @@ const SPRITES = {
     "...OOO..OO..", "..OOAAOOAAO.", ".OAAAAAAOO..", ".OAOSSAAO...",
     "..OOAAOO....", "...O..O.....", "..OO..OO....", ".OS....SO..."]
   },
+  store: { palette: PAL, grid: [
+    "..OOOOOOOO..", ".OAAAAAAAO.", "OAAAAAAAAAO", "OWOWOWOWOWO",
+    "OOOOOOOOOOO", "OOWWWWWWWOO", "OOWOOWOOWOO", "OOWOOWOOWOO",
+    "OOWWWWWWWOO", "OOOOOOOOOOO", "..OO....OO.", "..OO....OO."]
+  },
+  exam: { palette: PAL, grid: [
+    "..OOOOOOOO..", ".OWWWWWWWO.", ".OWAAAAWWO.", ".OWWWWWWWO.",
+    ".OWAAAWWWO.", ".OWWWWWWWO.", ".OWWAAWWWO.", ".OWWWWWWWO.",
+    ".OWAAAAWWO.", ".OWWWWWWWO.", ".OOOOOOOO.", "...O..O..."]
+  },
   // "?" tile — for unnamed / coming-soon apps
   question: { palette: PAL, grid: [
     "..OOOOOOOO..", ".OWWWWWWWWO.", "OWWAAAAAAWWO", "OWAAWWWWAAWO",

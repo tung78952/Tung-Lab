@@ -103,23 +103,39 @@ function CoffeeSteam() {
 }
 
 function PortfolioProjects({ copy, textKey }) {
+  const noteStyles = [
+    { paper: "color-mix(in srgb, var(--surface) 88%, #f3c7b5)", tape: "#e6b289", rotate: "-0.7deg" },
+    { paper: "color-mix(in srgb, var(--surface) 88%, #d8e4ec)", tape: "#8fb1c8", rotate: "0.8deg" },
+    { paper: "color-mix(in srgb, var(--surface) 88%, #f1d28b)", tape: "#cc6b4e", rotate: "-0.35deg" }
+  ];
   return (
-    <section id="portfolio-projects" style={{ background: "var(--bg)", padding: "78px 28px 86px" }}>
+    <section id="portfolio-projects" style={{ background: "var(--bg)", padding: "78px 28px 92px", position: "relative", overflow: "hidden" }}>
       <div style={{ maxWidth: 1180, margin: "0 auto" }}>
         <SectionHead kicker="PROJECTS" title={copy.projectsTitle} sub={copy.projectsSub} />
-        <div className="portfolio-card-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginTop: 38 }}>
-          {PORTFOLIO.projects.map((project) => (
-            <article key={project.name} className="portfolio-card" style={{ background: "var(--surface)", border: "2px solid var(--ink)", boxShadow: "5px 5px 0 var(--shadow)", padding: 22, display: "flex", flexDirection: "column", gap: 16 }}>
-              <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", color: "var(--ink)", fontSize: 27, lineHeight: 1.02, margin: 0 }}>{project.name}</h3>
-              <p style={{ fontSize: 14.5, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0 }}>{project[textKey]}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: "auto" }}>
-                {project.tags.map((tag) => <TechTag key={tag}>{tag}</TechTag>)}
+        <div className="portfolio-card-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28, marginTop: 44, alignItems: "stretch" }}>
+          {PORTFOLIO.projects.map((project, i) => {
+            const note = noteStyles[i % noteStyles.length];
+            return (
+            <article key={project.name} className="portfolio-card project-note" style={{ position: "relative", background: note.paper, color: "var(--ink)", border: "2px solid var(--ink)", boxShadow: "7px 7px 0 var(--shadow)", padding: "28px 22px 22px", display: "flex", flexDirection: "column", gap: 15, minHeight: 360, transform: `rotate(${note.rotate})` }}>
+              <div aria-hidden="true" style={{ position: "absolute", top: -14, left: "50%", width: 76, height: 24, transform: "translateX(-50%) rotate(-2deg)", background: note.tape, opacity: 0.82, border: "2px solid color-mix(in srgb, var(--ink) 58%, transparent)", boxShadow: "3px 3px 0 rgba(0,0,0,.18)" }} />
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 14 }}>
+                <span style={{ display: "inline-flex", alignItems: "center", padding: "5px 9px", border: "2px solid var(--ink)", background: "var(--accent)", color: "#fff", boxShadow: "2px 2px 0 var(--shadow)", fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.12em" }}>{project.type}</span>
+                <div style={{ display: "flex", transform: "rotate(3deg)" }}><Sprite name={project.icon} scale={4} /></div>
               </div>
-              <a href={project.repo} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start", gap: 8, marginTop: 4, padding: "9px 13px", border: "2px solid var(--ink)", background: "var(--surface-2)", color: "var(--ink)", boxShadow: "3px 3px 0 var(--shadow)", textDecoration: "none", fontSize: 13, fontWeight: 800 }}>
+              <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", color: "var(--ink)", fontSize: 29, lineHeight: 1.02, margin: 0 }}>{project.name}</h3>
+              <p style={{ fontSize: 14.5, color: "var(--ink-soft)", lineHeight: 1.62, margin: 0 }}>{project[textKey]}</p>
+              <div style={{ borderLeft: "4px solid var(--accent)", padding: "8px 0 8px 12px", background: "color-mix(in srgb, var(--surface) 72%, transparent)" }}>
+                <div style={{ fontFamily: "ui-monospace, monospace", fontSize: 10, letterSpacing: "0.13em", fontWeight: 800, color: "var(--accent-ink)", marginBottom: 5 }}>WHAT I LEARNED</div>
+                <p style={{ fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.45, margin: 0 }}>{project.learned[textKey]}</p>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: "auto" }}>
+                {project.tags.map((tag, tagIndex) => <TechSticker key={tag} tone={tagIndex % 3}>{tag}</TechSticker>)}
+              </div>
+              <a href={project.repo} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start", gap: 8, marginTop: 2, padding: "10px 14px", border: "2px solid var(--ink)", background: "var(--ink)", color: "var(--surface)", boxShadow: "3px 3px 0 var(--shadow)", textDecoration: "none", fontSize: 13, fontWeight: 800 }}>
                 GitHub <span aria-hidden="true">↗</span>
               </a>
             </article>
-          ))}
+          );})}
         </div>
       </div>
     </section>
@@ -205,4 +221,15 @@ function TechTag({ children }) {
   );
 }
 
-Object.assign(window, { PortfolioPage, PortfolioHero, PortfolioAbout, PortfolioProjects, PortfolioSkills, PortfolioAi, PortfolioInterests, PortfolioContact, TechTag });
+function TechSticker({ children, tone = 0 }) {
+  const bg = tone === 0
+    ? "color-mix(in srgb, var(--accent-soft) 76%, var(--surface))"
+    : tone === 1
+      ? "color-mix(in srgb, var(--accent2) 18%, var(--surface))"
+      : "var(--surface-2)";
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", padding: "5px 9px", border: "1px solid var(--border)", background: bg, color: "var(--ink)", fontSize: 12, fontWeight: 800, boxShadow: "2px 2px 0 color-mix(in srgb, var(--shadow) 22%, transparent)" }}>{children}</span>
+  );
+}
+
+Object.assign(window, { PortfolioPage, PortfolioHero, PortfolioAbout, PortfolioProjects, PortfolioSkills, PortfolioAi, PortfolioInterests, PortfolioContact, TechTag, TechSticker });
