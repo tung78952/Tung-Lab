@@ -162,6 +162,58 @@ const SPRITES = {
       "..KKKKKKKKKKKK..",
       "..KKKKK..KKKKK.."
     ]
+  },
+  tungCoffee: {
+    palette: { ...TUNG_POSE_PAL, T: "var(--muted)", S: "var(--accent2)" },
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFKKFFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFK....",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWTWTWWAAAK.",
+      ".KAAWWKSSSKKWAK.",
+      ".KFFWWKSSSKSKFK.",
+      ".KFFWWKSSSKSKFK.",
+      ".KFFWWKKSSKKWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  tungConfused: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKFFF..",
+      "..KKKKKFFFKKFF..",
+      "..KKKFFFFFFFKF..",
+      "..KKFFFFFFFFFKF.",
+      "..KFFKFFFFKFFKF.",
+      "..KFFFFFFFFFFKA.",
+      "..KFFFFKKFFFFKA.",
+      "...KFFFFFFFFKAA.",
+      "....KFFFFFFKAA..",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWWWWWWAAAK.",
+      ".KAAWWWWWWWWAAK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
   }
 };
 

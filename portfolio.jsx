@@ -59,8 +59,19 @@ function PortfolioAbout({ copy, theme }) {
     <section style={{ background: "var(--surface)", padding: "78px 28px" }}>
       <div className="portfolio-two" style={{ maxWidth: 1180, margin: "0 auto", display: "grid", gridTemplateColumns: "0.8fr 1.2fr", gap: 44, alignItems: "center" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ border: "2px solid var(--ink)", boxShadow: "6px 6px 0 var(--shadow)", background: "var(--surface-2)", padding: 26, width: "min(100%, 280px)", display: "flex", justifyContent: "center" }}>
-            {theme === "dark" ? <Sprite name="tungSleep" scale={10} /> : <MascotAsset size="about" style={{ width: 154, height: 231 }} />}
+          <div style={{ position: "relative", width: "min(100%, 280px)", minHeight: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            {theme === "dark" && <CoffeeSteam />}
+            {theme !== "dark" && (
+              <div style={{ position: "absolute", right: 14, top: 34, fontFamily: "'Pixelify Sans', sans-serif", fontSize: 44, color: "var(--accent)", transform: "rotate(7deg)", filter: "drop-shadow(2px 2px 0 var(--surface))" }}>?</div>
+            )}
+            <div style={{
+              display: "flex",
+              filter: theme === "dark"
+                ? "drop-shadow(0 0 0 var(--band-ink)) drop-shadow(4px 0 0 var(--band-ink)) drop-shadow(-4px 0 0 var(--band-ink)) drop-shadow(0 4px 0 var(--band-ink)) drop-shadow(0 -4px 0 var(--band-ink)) drop-shadow(8px 8px 0 #000)"
+                : "drop-shadow(0 0 0 #fff) drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(7px 7px 0 var(--accent))"
+            }}>
+              <Sprite name={theme === "dark" ? "tungCoffee" : "tungConfused"} scale={13} />
+            </div>
           </div>
         </div>
         <div>
@@ -69,6 +80,16 @@ function PortfolioAbout({ copy, theme }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function CoffeeSteam() {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", right: 20, top: 4, display: "flex", flexDirection: "column", gap: 0, alignItems: "center", fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 0.86, transform: "rotate(8deg)", zIndex: 2 }}>
+      <span style={{ fontSize: 28, opacity: 0.55 }}>~</span>
+      <span style={{ fontSize: 34, opacity: 0.78 }}>~</span>
+      <span style={{ fontSize: 40 }}>~</span>
+    </div>
   );
 }
 
