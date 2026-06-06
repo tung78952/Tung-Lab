@@ -34,11 +34,17 @@ function PortfolioHero({ copy, t, onNav, theme }) {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div style={{ position: "relative", width: 380, height: 390 }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 42%, var(--accent-soft), transparent 65%)" }} />
-            <div style={{ position: "absolute", top: 4, left: "50%", transform: "translateX(-50%)", filter: "drop-shadow(0 0 0 #fff) drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(9px 9px 0 var(--accent))" }}>
-              {theme === "dark" ? <Sprite name="tungSleep" scale={12} /> : <MascotAsset size="about" />}
+            <div style={{ position: "absolute", top: 18, left: "50%", transform: "translateX(-50%)", filter: "drop-shadow(0 0 0 #fff) drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(9px 9px 0 var(--accent))" }}>
+              <Sprite name={theme === "dark" ? "tungSleepPose" : "tungThumb"} scale={13} />
             </div>
-            <div style={{ position: "absolute", right: 6, top: 52, transform: "rotate(6deg)" }}><Sprite name="fphoto" scale={6} /></div>
             <div style={{ position: "absolute", left: 2, top: 84, transform: "rotate(-8deg)" }}><Sprite name="bot" scale={6} /></div>
+            {theme === "dark" && (
+              <div style={{ position: "absolute", right: 42, top: 56, display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(7deg)" }}>
+                <span style={{ fontSize: 18, opacity: 0.55 }}>z</span>
+                <span style={{ fontSize: 28, opacity: 0.8 }}>Z</span>
+                <span style={{ fontSize: 40 }}>Z</span>
+              </div>
+            )}
             <div style={{ position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)", fontFamily: "ui-monospace, monospace", fontSize: 12, fontWeight: 700, color: "var(--accent-ink)", background: "var(--accent-soft)", border: "2px solid var(--ink)", boxShadow: "4px 4px 0 var(--shadow)", padding: "9px 13px", whiteSpace: "nowrap" }}>{copy.hero.status}</div>
           </div>
         </div>

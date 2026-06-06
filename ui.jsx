@@ -20,6 +20,14 @@ function PixelArt({ grid, palette, scale = 8, className, style }) {
 
 /* tokens: O=outline(ink) A=accent L=accent-light W=highlight S=secondary(blue) */
 const PAL = { O: "var(--ink)", A: "var(--accent)", L: "var(--accent-lt)", W: "var(--hl)", S: "var(--accent2)" };
+const TUNG_POSE_PAL = {
+  ".": "transparent",
+  K: "#241f1b",
+  F: "var(--skin)",
+  A: "var(--accent)",
+  W: "#fbf2ef",
+  Z: "var(--accent)"
+};
 const SPRITES = {
   camera: { palette: PAL, grid: [
     "....OOOO....", "...OAAAAO...", "..OAAAAAAO..", "..OALWWLAO..",
@@ -102,6 +110,58 @@ const SPRITES = {
     ".OFFFFFFFOAAAAAAAAO.", ".OFFFFFFOOAAAAAAAAO.", ".WWWWWWWWOAAAAAAAAO.",
     ".OWWWWWWOOAAAAAAAAO.", ".OOOOOOOOOOOOOOOOOO.", "..OOOOOOOOOOOOOO...."]
 
+  },
+  tungThumb: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFKKFFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFKFF..",
+      "..KAAAWWWWAAFFFF",
+      ".KAAAWWWWWWAFFFF",
+      ".KAAWWWWWWWWAFFF",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  tungSleepPose: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFKKFFFFKKFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFFKKFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFK....",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWWWWWWAAAK.",
+      ".KAAWWWWWWWWAAK.",
+      ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
   }
 };
 
