@@ -84,11 +84,20 @@ function PortfolioAbout({ copy, theme }) {
 }
 
 function CoffeeSteam() {
+  const wisps = [
+    { left: 0, top: 20, path: [[1, 3], [1, 2], [2, 2], [2, 1], [1, 1], [1, 0]] },
+    { left: 18, top: 8, path: [[1, 4], [2, 3], [2, 2], [1, 2], [1, 1], [2, 0]] },
+    { left: 36, top: 24, path: [[1, 3], [2, 3], [2, 2], [1, 1], [1, 0], [0, 0]] }
+  ];
   return (
-    <div aria-hidden="true" style={{ position: "absolute", right: 20, top: 4, display: "flex", flexDirection: "column", gap: 0, alignItems: "center", fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 0.86, transform: "rotate(8deg)", zIndex: 2 }}>
-      <span style={{ fontSize: 28, opacity: 0.55 }}>~</span>
-      <span style={{ fontSize: 34, opacity: 0.78 }}>~</span>
-      <span style={{ fontSize: 40 }}>~</span>
+    <div aria-hidden="true" style={{ position: "absolute", left: 132, top: 162, width: 72, height: 84, zIndex: 3, pointerEvents: "none" }}>
+      {wisps.map((wisp, i) => (
+        <div key={i} className="coffee-steam-wisp" style={{ position: "absolute", left: wisp.left, top: wisp.top, width: 30, height: 50 }}>
+          {wisp.path.map(([x, y], j) => (
+            <span key={j} style={{ position: "absolute", left: x * 7, top: y * 7, width: 7, height: 7, background: i === 1 ? "var(--accent-lt)" : "var(--band-muted)", opacity: i === 1 ? 0.9 : 0.72 }} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
