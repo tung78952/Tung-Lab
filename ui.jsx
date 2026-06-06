@@ -230,27 +230,46 @@ function PlatformChip({ label, active }) {
    ============================================================ */
 function Header({ locale, setLocale, t, onNav, route, theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = useRef(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const updateHeight = () => setHeaderHeight(header.offsetHeight);
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(header);
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
   return (
-    <header style={{ position: "sticky", top: 0, zIndex: 50, background: scrolled ? "color-mix(in srgb, var(--bg) 86%, transparent)" : "transparent", backdropFilter: scrolled ? "blur(10px)" : "none", borderBottom: scrolled ? "2px solid var(--border)" : "2px solid transparent", transition: "background .2s, border-color .2s" }}>
-      <div className="site-header-inner" style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <button className="site-brand" onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-          <BrandMascot theme={theme} />
-          <span className="site-brand-text" style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
-        </button>
-        <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
-          <NavLink active={false} onClick={() => onNav("home", "apps")}>{t.nav.apps}</NavLink>
-          <NavLink active={false} onClick={() => onNav("home", "about")}>{t.nav.about}</NavLink>
-          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-          <LangSwitch locale={locale} setLocale={setLocale} />
-        </nav>
-      </div>
-    </header>);
+    <>
+      <header data-site-header ref={headerRef} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, background: scrolled ? "color-mix(in srgb, var(--bg) 86%, transparent)" : "transparent", backdropFilter: scrolled ? "blur(10px)" : "none", borderBottom: scrolled ? "2px solid var(--border)" : "2px solid transparent", transition: "background .2s, border-color .2s" }}>
+        <div className="site-header-inner" style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <button className="site-brand" onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <BrandMascot theme={theme} />
+            <span className="site-brand-text" style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
+          </button>
+          <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
+            <NavLink active={false} onClick={() => onNav("home", "apps")}>{t.nav.apps}</NavLink>
+            <NavLink active={false} onClick={() => onNav("home", "about")}>{t.nav.about}</NavLink>
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <LangSwitch locale={locale} setLocale={setLocale} />
+          </nav>
+        </div>
+      </header>
+      <div aria-hidden="true" style={{ height: headerHeight }} />
+    </>);
 
 }
 function NavLink({ children, active, onClick }) {

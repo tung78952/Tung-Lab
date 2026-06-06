@@ -54,7 +54,8 @@ function Root() {
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (el) {
-    const y = el.getBoundingClientRect().top + window.scrollY - 64;
+    const headerHeight = document.querySelector("[data-site-header]")?.offsetHeight || 64;
+    const y = el.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
     window.scrollTo({ top: y, behavior: "smooth" });
   }
 }
