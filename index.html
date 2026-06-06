@@ -67,6 +67,48 @@
       background: var(--accent) !important;
       color: #fff !important;
     }
+    .interest-card {
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+    .interest-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--shadow) !important;
+    }
+    .interest-card:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .interest-music-on .sprite { animation: bob .42s ease-in-out infinite; }
+    .interest-flash { animation: flashPop .5s ease-out forwards; }
+    .interest-polaroid { animation: polaroidOut 1.15s ease-out forwards; }
+    .interest-note { animation: floatUp 1.25s ease-out forwards; }
+    .interest-glow { animation: screenFlicker .18s steps(2) 8; }
+    .interest-shimmer { animation: shimmer 1s ease-out forwards; }
+    .interest-goal { animation: goalPop 1.2s ease-out forwards; }
+    @keyframes flashPop { 0% { opacity: 0; } 8% { opacity: .96; } 100% { opacity: 0; } }
+    @keyframes polaroidOut {
+      0% { opacity: 0; transform: translateY(-8px) rotate(-4deg) scale(.6); }
+      28% { opacity: 1; }
+      100% { opacity: 1; transform: translateY(34px) rotate(4deg) scale(1); }
+    }
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(8px) scale(.7); }
+      14% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-48px) scale(1.12); }
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes screenFlicker { 0%,100% { opacity: .5; } 50% { opacity: .95; } }
+    @keyframes shimmer {
+      0% { opacity: 0; transform: translateY(5px) scale(.6); }
+      30% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-24px) scale(1.2); }
+    }
+    @keyframes goalPop {
+      0% { opacity: 0; transform: translateX(-50%) scale(.45); }
+      24% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+      82% { opacity: 1; transform: translateX(-50%) scale(1); }
+      100% { opacity: 0; transform: translateX(-50%) scale(.92); }
+    }
     .shots-scroll { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
     .shots-scroll::-webkit-scrollbar { height: 8px; }
     .shots-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }

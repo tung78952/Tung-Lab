@@ -28,6 +28,28 @@ const TUNG_POSE_PAL = {
   W: "#fbf2ef",
   Z: "var(--accent)"
 };
+const INTEREST_PAL = {
+  ".": "transparent",
+  K: "#241f1b",
+  F: "var(--skin)",
+  f: "#d49a73",
+  A: "var(--accent)",
+  W: "#fbf2ef",
+  w: "#e9ded9",
+  G: "#5b5750",
+  M: "#9a948c",
+  D: "#1a1815",
+  B: "#2b3640",
+  H: "#a8c0cc",
+  V: "#7ad6ff",
+  S: "var(--accent2)",
+  P: "#857f77",
+  g: "#7fae5e",
+  r: "#cf5b50",
+  y: "#e8c14a",
+  j: "#cf1124",
+  n: "#0a7d3f"
+};
 const SPRITES = {
   camera: { palette: PAL, grid: [
     "....OOOO....", "...OAAAAO...", "..OAAAAAAO..", "..OALWWLAO..",
@@ -222,6 +244,72 @@ const SPRITES = {
       ".KFFWWWWWWWWWWK.",
       "..KWWWWWWWWWWK..",
       "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestCamera: {
+    palette: INTEREST_PAL,
+    grid: [
+      "...KKKKKKKK.....", "..KKKKKKKKKK....", ".KKKKKKKKKKKK...", ".KKKKKKKKKKKKK..",
+      ".KKKKKKfFFFKKK..", ".KKKKfFFFFFFKK..", ".KKKfFFFFFFFFK..", ".KKfFFKFFFFKFK..",
+      ".KKfFFFFFFFFFK..", ".KKfFFFFKKFFFK..", "..KKfFFFFFFFK...", "...KfFFFFFFK....",
+      "..KAAAWGGGWAAK..", ".KFFWGGDDGGWFFK.", ".KFFWGDHBDGGFFK.", ".KFFWGDBBDGGFFK.",
+      ".KFFWGGDDGGWFFK.", ".KFFWWWWWWWWWWK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestMusic: {
+    palette: INTEREST_PAL,
+    grid: [
+      "...PPPPPPPPPP...", "..PKKKKKKKKKKP..", ".PKKKKKKKKKKKKP.", ".PKKKKKKKKKKKKP.",
+      ".PKKKKKFFFKKKKP.", "PPKKKFFFFFFFKKPP", "PAKKFFFFFFFFFKAP", "PAKFFKFFFFKFFKAP",
+      "PAKFFFFFFFFFFKAP", "PPKFFFFKKFFFFKPP", "..KKFFFFFFFFKK..", "...KFFFFFFFFK...",
+      "..KAAAWWWWAAAK..", ".KAAAWWWWWWAAAK.", ".KAAWWWWWWWWAAK.", ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.", ".KFFWWWWWWWWFFK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestGaming: {
+    palette: INTEREST_PAL,
+    grid: [
+      "...KKKKKKKK.....", "..KKKKKKKKKK....", ".KKKKKKKKKKKK...", ".KKKKKKKKKKKK...",
+      ".KKKKKFFFKKKK...", ".KKKFFFFFFFKK...", ".KKFFFFFFFFFK...", ".KFFKFFFFKFFK...",
+      ".KFFFFFFFFFFK...", ".KFFFFKKFFFFK...", "..KFFFFFFFFK....", "...KFFFFFFK.....",
+      "..KAAAWWWWAAAK..", ".KAAAWWWWWWAAAK.", ".KFFGGGGGGGGFFK.", ".KFFGSSSSSSGGFK.",
+      ".KFFGSSSSSSGAFK.", ".KFFGGKGGGAGGFK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestModel: {
+    palette: INTEREST_PAL,
+    grid: [
+      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..", "..KKKFFFFFFFKK..", "..KKFFFFFFFFFK..", "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..", "..KFFFFKKFFFFK..", "...KFFFFFFFFK...", "....KFFFFFFK....",
+      "..KAAAyAAyKAAK..", ".KAAAWDDDDWAAAK.", ".KAAWDMMMMDWWAK.", ".KFFWDVVVVDWFFK.",
+      ".KFFWDMMMMDWFFK.", ".KFFWWDMMDWWFFK.", "..KWWWDMMDWWWK..", "..KKKKDMMDKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestFootball: {
+    palette: INTEREST_PAL,
+    grid: [
+      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..", "..KKKFFFFFFFKK..", "..KKFFFFFFFFFK..", "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..", "..KFFFFKKFFFFK..", "...KFFFFFFFFK...", "....KFFFFFFK....",
+      "..KjjjjnnjjjjK..", ".KjjjjjnnjjjjjK.", ".KjjjjjjjjjjjjK.", ".KFFjjjjjjyjFFK.",
+      ".KFFjjjjjjjjFFK.", ".KFFjjjjjjjjFFK.", "..KjjjjjjjjjjK..", "..KnnnnnnnnnnK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestFootballBack: {
+    palette: INTEREST_PAL,
+    grid: [
+      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "...KKKKKKKKKK...", "....KFFFFFFK....",
+      "..KjjjjjjjjjjK..", "..KFjjWWWWjjFK..", ".KFjjjjjjWjjjFK.", "KFjjjjjjWjjjjjFK",
+      "KFjjjjjWjjjjjjFK", "..KjjjjjjjjjjK..", "..KnnnnnnnnnnK..", "..KnnnnnnnnnnK..",
       "..KKKKK..KKKKK.."
     ]
   }
