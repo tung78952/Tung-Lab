@@ -116,7 +116,7 @@ function PortfolioProjects({ copy, textKey }) {
           {PORTFOLIO.projects.map((project, i) => {
             const note = noteStyles[i % noteStyles.length];
             return (
-            <article key={project.name} className="portfolio-card project-note" style={{ position: "relative", background: note.paper, color: "var(--ink)", border: "2px solid var(--ink)", boxShadow: "7px 7px 0 var(--shadow)", padding: "28px 22px 22px", display: "flex", flexDirection: "column", gap: 15, minHeight: 360, transform: `rotate(${note.rotate})` }}>
+            <article key={project.name} className="portfolio-card project-note" style={{ "--note-rotate": note.rotate, "--note-hover-rotate": i % 2 ? "1.6deg" : "-1.4deg", position: "relative", background: note.paper, color: "var(--ink)", border: "2px solid var(--ink)", boxShadow: "7px 7px 0 var(--shadow)", padding: "28px 22px 22px", display: "flex", flexDirection: "column", gap: 15, minHeight: 360 }}>
               <div aria-hidden="true" style={{ position: "absolute", top: -14, left: "50%", width: 76, height: 24, transform: "translateX(-50%) rotate(-2deg)", background: note.tape, opacity: 0.82, border: "2px solid color-mix(in srgb, var(--ink) 58%, transparent)", boxShadow: "3px 3px 0 rgba(0,0,0,.18)" }} />
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 14 }}>
                 <span style={{ display: "inline-flex", alignItems: "center", padding: "5px 9px", border: "2px solid var(--ink)", background: "var(--accent)", color: "#fff", boxShadow: "2px 2px 0 var(--shadow)", fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.12em" }}>{project.type}</span>
@@ -131,7 +131,7 @@ function PortfolioProjects({ copy, textKey }) {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: "auto" }}>
                 {project.tags.map((tag, tagIndex) => <TechSticker key={tag} tone={tagIndex % 3}>{tag}</TechSticker>)}
               </div>
-              <a href={project.repo} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start", gap: 8, marginTop: 2, padding: "10px 14px", border: "2px solid var(--ink)", background: "var(--ink)", color: "var(--surface)", boxShadow: "3px 3px 0 var(--shadow)", textDecoration: "none", fontSize: 13, fontWeight: 800 }}>
+              <a className="project-github-link" href={project.repo} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start", gap: 8, marginTop: 2, padding: "10px 14px", border: "2px solid var(--ink)", background: "var(--ink)", color: "var(--surface)", boxShadow: "3px 3px 0 var(--shadow)", textDecoration: "none", fontSize: 13, fontWeight: 800 }}>
                 GitHub <span aria-hidden="true">↗</span>
               </a>
             </article>

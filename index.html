@@ -47,6 +47,26 @@
     .navlink:hover { color: var(--accent) !important; }
     .appcard { transition: transform .14s ease, box-shadow .14s ease; }
     .appcard:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--shadow); }
+    .project-note {
+      transform: rotate(var(--note-rotate, 0deg));
+      transform-origin: 50% 10%;
+      transition: transform .18s ease, box-shadow .18s ease;
+      will-change: transform;
+    }
+    .project-note:hover {
+      transform: translateY(-10px) rotate(var(--note-hover-rotate, 0deg)) skewY(-0.8deg);
+      box-shadow: 11px 15px 0 var(--shadow) !important;
+    }
+    .project-github-link {
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      cursor: pointer;
+    }
+    .project-github-link:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--shadow) !important;
+      background: var(--accent) !important;
+      color: #fff !important;
+    }
     .shots-scroll { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
     .shots-scroll::-webkit-scrollbar { height: 8px; }
     .shots-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
