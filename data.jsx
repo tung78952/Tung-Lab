@@ -25,7 +25,7 @@ const STRINGS = {
     detail: { version: "Phiên bản", released: "Ngày phát hành", file: "Tên file", minos: "Hệ điều hành tối thiểu", size: "Dung lượng", releaseNotes: "Trang phát hành trên GitHub", step: "Bước" },
     footerCta: { title: "Cần lọc ảnh nhanh hơn?", desc: "Tải FPhoto và thử ngay trong vài phút.", btn: "Tải FPhoto cho Windows" },
     footer: { blurb: "Các app nhỏ do Tùng tự làm. Tải trực tiếp, dùng ngay.", github: "GitHub", copyright: "© 2026 Tung Lab. Apps built by Tung." },
-    about: { title: "Về Tung Lab", body: "Tung Lab là không gian cá nhân để mình gom các app tự làm về một chỗ — mỗi cái giải một bài toán cụ thể trong công việc. Không backend, không tài khoản, không thu thập dữ liệu. Bạn thấy app hữu ích thì tải về dùng.", ctaTitle: "Muốn biết người đứng sau Tung Lab?", ctaDesc: "Mình có một trang About Me riêng: dự án, kỹ năng, cách mình học bằng project thật và một vài sở thích ngoài code." },
+    about: { title: "Về Tung Lab", body: "Tung Lab là không gian cá nhân để mình gom các app tự làm về một chỗ — mỗi cái giải một bài toán cụ thể trong công việc. Không backend, không tài khoản, không thu thập dữ liệu. Bạn thấy app hữu ích thì tải về dùng.", mascotHint: "Gặp Tùng →" },
   },
   en: {
     nav: { home: "Home", apps: "Apps", about: "About", aboutMe: "About Me" },
@@ -45,7 +45,7 @@ const STRINGS = {
     detail: { version: "Version", released: "Released", file: "File name", minos: "Minimum OS", size: "Size", releaseNotes: "GitHub release page", step: "Step" },
     footerCta: { title: "Need to cull photos faster?", desc: "Grab FPhoto and try it in minutes.", btn: "Download FPhoto for Windows" },
     footer: { blurb: "Small apps built by Tung. Direct downloads, ready to use.", github: "GitHub", copyright: "© 2026 Tung Lab. Apps built by Tung." },
-    about: { title: "About Tung Lab", body: "Tung Lab is a personal space where I collect the apps I build — each one solving a specific job at work. No backend, no accounts, no data collection. If an app helps, just download and use it.", ctaTitle: "Want to meet the person behind Tung Lab?", ctaDesc: "I made a separate About Me page for projects, skills, how I learn by building real things, and a few interests outside code." },
+    about: { title: "About Tung Lab", body: "Tung Lab is a personal space where I collect the apps I build — each one solving a specific job at work. No backend, no accounts, no data collection. If an app helps, just download and use it.", mascotHint: "Meet Tung →" },
   },
 };
 
@@ -201,7 +201,7 @@ const PORTFOLIO = {
     buttons: { projects: "View Projects", github: "GitHub", contact: "Contact" }
   },
   projects: [
-    { name: "BikeStore Management System", type: "FULL-STACK", icon: "store", repo: "https://github.com/tung78952/bike-store-fullstack", tags: ["FastAPI", "ReactJS", "PostgreSQL", "SQLAlchemy", "JWT", "Tailwind CSS", "Docker"], vi: "Full-stack web app quản lý cửa hàng xe đạp: sản phẩm, khách hàng, nhân viên, đơn hàng, tồn kho, doanh thu, đăng nhập và phân quyền.", en: "A full-stack web app for bicycle store management: products, customers, staff, orders, inventory, sales, authentication, and role-based access.", learned: { vi: "Auth, roles, inventory logic, API design", en: "Auth, roles, inventory logic, API design" } },
+    { name: "BikeStore Management System", type: "FULL-STACK", icon: "bike", repo: "https://github.com/tung78952/bike-store-fullstack", tags: ["FastAPI", "ReactJS", "PostgreSQL", "SQLAlchemy", "JWT", "Tailwind CSS", "Docker"], vi: "Full-stack web app quản lý cửa hàng xe đạp: sản phẩm, khách hàng, nhân viên, đơn hàng, tồn kho, doanh thu, đăng nhập và phân quyền.", en: "A full-stack web app for bicycle store management: products, customers, staff, orders, inventory, sales, authentication, and role-based access.", learned: { vi: "Auth, roles, inventory logic, API design", en: "Auth, roles, inventory logic, API design" } },
     { name: "Exam Generation and Grading Management System", type: "COURSE PROJECT", icon: "exam", repo: "https://github.com/tung78952/Exam-Generation-and-Grading-Management-System", tags: ["NextJS", "ReactJS", "TypeScript", "NestJS", "Prisma", "MySQL", "Docker", "JWT"], vi: "Project môn Nhập môn Công nghệ Phần mềm, hỗ trợ quản lý ngân hàng câu hỏi, tạo đề, chấm điểm, báo cáo và phân quyền Admin/Lecturer.", en: "A Software Engineering course project for question banks, exam generation, grading, reports, and Admin/Lecturer permissions.", learned: { vi: "Exam flow, permissions, grading workflow", en: "Exam flow, permissions, grading workflow" } },
     { name: "FPhoto", type: "PERSONAL APP", icon: "fphoto", repo: "https://github.com/tung78952/FPhoto", tags: ["Electron", "TypeScript", "SQLite", "HTML", "CSS"], vi: "Windows desktop app giúp photographer lọc, tìm kiếm, preview và copy ảnh nhanh hơn sau buổi chụp. Project xuất phát từ nhu cầu thật khi phải chọn ảnh thủ công.", en: "A Windows desktop app that helps photographers filter, search, preview, and copy photos faster after a shoot. It came from a real workflow problem.", learned: { vi: "Desktop UX, file safety, real workflow", en: "Desktop UX, file safety, real workflow" } }
   ],

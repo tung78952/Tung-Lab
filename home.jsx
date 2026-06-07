@@ -45,7 +45,7 @@ function HeroSplit({ t, onNav, pixel, theme }) {
           </div>
           <HeroStats t={t} />
         </div>
-        <MascotScene theme={theme} onClick={() => onNav("about-me")} />
+        <MascotScene theme={theme} label={t.about.mascotHint} onClick={() => onNav("about-me")} />
       </div>
       <PixelEdge color="var(--accent)" align="content" />
     </section>
@@ -111,12 +111,16 @@ function FloatCartridge({ sprite, style, label, big, onClick }) {
   );
 }
 
-function MascotScene({ theme, onClick }) {
+function MascotScene({ theme, label, onClick }) {
   const asleep = theme === "dark";
   return (
-    <button aria-label="Open About Me" onClick={onClick} style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", background: "none", border: "none", padding: 0, cursor: "pointer" }}>
+    <button aria-label="Open About Me" className="hero-mascot-button" onClick={onClick} style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", background: "none", border: "none", padding: 0, cursor: "pointer" }}>
       <div className="hero-mascot-frame" style={{ position: "relative", width: 380, height: 380 }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 45%, var(--accent-soft), transparent 65%)" }} />
+        <div className="mascot-hint" style={{ position: "absolute", bottom: 62, left: "50%", transform: "translateX(-50%) rotate(-2deg)", zIndex: 6, display: "inline-flex", alignItems: "center", gap: 5, padding: "5px 8px", background: "var(--surface)", color: "var(--ink)", border: "2px solid var(--ink)", boxShadow: "3px 3px 0 var(--shadow)", fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
+          <span className="mascot-hint-dot" style={{ width: 5, height: 5, background: "var(--accent)", display: "inline-block" }} />
+          {label}
+        </div>
         {asleep ? (
           <>
             <div style={{ position: "absolute", top: 26, right: 24, transform: "rotate(6deg)", opacity: 0.85 }}><Sprite name="fphoto" scale={5} /></div>
@@ -315,7 +319,7 @@ function About({ t, theme, onNav }) {
               </div>
             )
             : (
-              <div style={{ display: "flex", filter: "drop-shadow(0 0 0 #fff) drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(8px 8px 0 var(--accent))" }}>
+              <div style={{ display: "flex", filter: "drop-shadow(0 0 0 var(--surface)) drop-shadow(4px 0 0 var(--surface)) drop-shadow(-4px 0 0 var(--surface)) drop-shadow(0 4px 0 var(--surface)) drop-shadow(0 -4px 0 var(--surface)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(9px 9px 0 var(--accent))" }}>
                 <MascotAsset size="about" />
               </div>
             )}
@@ -323,10 +327,19 @@ function About({ t, theme, onNav }) {
         <div>
           <SectionHead kicker="ABOUT" title={t.about.title} light />
           <p style={{ fontSize: 18, color: "var(--band-muted)", lineHeight: 1.7, margin: "18px 0 0", maxWidth: 540 }}>{t.about.body}</p>
-          <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--band-border)" }}>
-            <h3 style={{ fontFamily: "var(--display-font)", fontSize: 28, color: "var(--band-ink)", margin: "0 0 10px" }}>{t.about.ctaTitle}</h3>
-            <p style={{ fontSize: 15.5, color: "var(--band-muted)", lineHeight: 1.65, margin: "0 0 18px", maxWidth: 560 }}>{t.about.ctaDesc}</p>
-            <Btn variant="ghost" onClick={() => onNav("about-me")}>{t.cta.aboutMe}</Btn>
+          <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--band-border)", display: "flex" }}>
+            <button type="button" className="about-pixel-arrow-cta" onClick={() => onNav("about-me")}>
+              <span className="about-pixel-arrow-deco" aria-hidden="true">
+                <span />
+                <span />
+              </span>
+              <span className="about-pixel-arrow-label">{t.cta.aboutMe}</span>
+              <span className="about-pixel-arrow-head" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            </button>
           </div>
         </div>
       </div>

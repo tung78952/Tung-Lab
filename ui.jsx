@@ -76,15 +76,38 @@ const SPRITES = {
     "...OOO..OO..", "..OOAAOOAAO.", ".OAAAAAAOO..", ".OAOSSAAO...",
     "..OOAAOO....", "...O..O.....", "..OO..OO....", ".OS....SO..."]
   },
-  store: { palette: PAL, grid: [
-    "..OOOOOOOO..", ".OAAAAAAAO.", "OAAAAAAAAAO", "OWOWOWOWOWO",
-    "OOOOOOOOOOO", "OOWWWWWWWOO", "OOWOOWOOWOO", "OOWOOWOOWOO",
-    "OOWWWWWWWOO", "OOOOOOOOOOO", "..OO....OO.", "..OO....OO."]
+  bike: { palette: PAL, grid: [
+    "................",
+    ".....OOO..OO....",
+    "......AAAAAO....",
+    "......A...AA....",
+    ".....A....AA....",
+    "..OOAA...A.OAO..",
+    ".O..AA...AO.A.O.",
+    "O..A..AAAO.....O",
+    "O..O..AO.O..O..O",
+    "O.....O..O.....O",
+    ".O...O....O...O.",
+    "..OOO......OOO.."]
   },
-  exam: { palette: PAL, grid: [
-    "..OOOOOOOO..", ".OWWWWWWWO.", ".OWAAAAWWO.", ".OWWWWWWWO.",
-    ".OWAAAWWWO.", ".OWWWWWWWO.", ".OWWAAWWWO.", ".OWWWWWWWO.",
-    ".OWAAAAWWO.", ".OWWWWWWWO.", ".OOOOOOOO.", "...O..O..."]
+  exam: {
+    palette: { ".": "transparent", O: "var(--ink)", W: "#fbf2ef", A: "var(--accent)", k: "#2a2620", r: "#d8392f" },
+    grid: [
+    "...OOOOOOOOO.",
+    "..OOWWWrrrWO.",
+    ".OOWWWrWWWrO.",
+    ".OWWWWrWrWrO.",
+    ".OWWWWrWWWrO.",
+    ".OWWWWWrrrWO.",
+    ".OWWWWWWWWWO.",
+    ".OWAAAAAAAWO.",
+    ".OWkkkkkWWWO.",
+    ".OWWWWWWWWWO.",
+    ".OWkkkkkkkWO.",
+    ".OWAAAAAAWWO.",
+    ".OWkkkkkkkWO.",
+    ".OWWWWWWWWWO.",
+    ".OOOOOOOOOOO."]
   },
   // "?" tile — for unnamed / coming-soon apps
   question: { palette: PAL, grid: [
@@ -283,12 +306,30 @@ const SPRITES = {
   interestModel: {
     palette: INTEREST_PAL,
     grid: [
-      ".........y..y...........", "........yK..Ky..........", ".......yKK..KKy.........", "......yKKKyyKKKy........",
-      ".......KWWWWWWK.........", "......KWWrrrrWWK........", ".....KWWyyyyyyWWK.......", ".....KWWyKyyKyWWK.......",
-      ".....KWWWWKKWWWWK.......", "......KWWKrrKWWK........", ".......KWWrrWWK.........", "......KWWWWWWWWK........",
-      "...KWWKKKSSKKKWWK.......", "..KWWKrrKSSKrrKWWK......", ".KDDKrrKSSKrrKDDK.......", ".KDDK..KSSK..KDDK.......",
-      "..KK...KrrK...KK........", "......KWrWWK............", ".....KWWKKWWK...........", "....KWWK..KWWK..........",
-      "...KrrK....KrrK.........", "...KrrK....KrrK.........", "....KK......KK..........", "......KSSSSK............"
+      ".....MK...KjjK...KM.....",
+      "......MK..KjjK..KM......",
+      ".......MK.KjjK.KM.......",
+      "....KKKKKKKjjKKKKKKK....",
+      "....KWWWWWWjjWWWWWWK....",
+      "....KWWWWyWWWWyWWWWK....",
+      "....KWWWWWyWWyWWWWWK....",
+      "....KWWWWWWyyWWWWWWK....",
+      "....KWKyyKKWWKKyyKWK....",
+      "....KWKKyKKWWKKyKKWK....",
+      "....KWWWKKKKKKKKWWWK....",
+      "....KWWWWGWGGWGWWWWK....",
+      ".....KWWWWWWWWWWWWK.....",
+      "......KWWWWWWWWWWK......",
+      "..KSSSSKWWWWWWWWKSSSSK..",
+      "..KSSSSKyyWWWWyyKSSSSK..",
+      "..KSSSSKWjWSSWjWKSSSSK..",
+      "..KSSSSKWrWSSWrWKSSSSK..",
+      "..KSSSSKWWWWWWWWKSSSSK..",
+      "...KKKK.WWWWWWWW.KKKK...",
+      "........KMMrrMMK........",
+      ".........KKKKKK.........",
+      "........................",
+      "........................"
     ]
   },
   interestFootball: {

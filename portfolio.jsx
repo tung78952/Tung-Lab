@@ -10,7 +10,6 @@ function PortfolioPage({ locale, t, onNav, theme }) {
       <PortfolioAbout copy={copy} theme={theme} />
       <PortfolioProjects copy={copy} textKey={textKey} />
       <PortfolioSkills copy={copy} />
-      <PortfolioAi copy={copy} />
       <PortfolioInterests copy={copy} textKey={textKey} />
       <PortfolioContact copy={copy} />
     </main>
@@ -163,25 +162,6 @@ function PortfolioSkills({ copy }) {
   );
 }
 
-function PortfolioAi({ copy }) {
-  return (
-    <section style={{ background: "var(--band)", color: "var(--band-ink)", position: "relative" }}>
-      <PixelEdge color="var(--accent)" style={{ height: 40 }} />
-      <div className="portfolio-two" style={{ maxWidth: 1180, margin: "0 auto", padding: "30px 28px 84px", display: "grid", gridTemplateColumns: "0.8fr 1.2fr", gap: 44, alignItems: "center" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ border: "2px solid var(--band-ink)", boxShadow: "6px 6px 0 #000", background: "var(--band-border)", padding: 30 }}>
-            <Sprite name="bot" scale={11} />
-          </div>
-        </div>
-        <div>
-          <SectionHead kicker="WORKFLOW" title={copy.aiTitle} light />
-          <p style={{ fontSize: 18, color: "var(--band-muted)", lineHeight: 1.75, margin: "20px 0 0", maxWidth: 720 }}>{copy.aiBody}</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function PortfolioInterests({ copy, textKey }) {
   return (
     <section style={{ background: "var(--bg)", padding: "78px 28px 88px" }}>
@@ -218,8 +198,11 @@ function InteractiveInterestCard({ item, textKey }) {
   return (
     <button type="button" onClick={click} className={`interest-card ${musicOn ? "interest-music-on" : ""}`} style={{ position: "relative", background: "var(--surface)", border: "2px solid var(--ink)", boxShadow: "4px 4px 0 var(--shadow)", padding: 16, minHeight: 300, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer", font: "inherit", color: "inherit", overflow: "hidden" }}>
       <div style={{ position: "relative", height: 178, width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: 14 }}>
-        <span style={{ position: "absolute", top: 7, left: 7, fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.11em", color: "var(--accent-ink)", background: "var(--accent-soft)", padding: "4px 7px" }}>{musicOn ? "ON" : "CLICK"}</span>
-        <Sprite name={spriteMap[item.id] || item.sprite} scale={item.id === "models" ? 5 : 6} />
+        {musicOn
+          ? <span style={{ position: "absolute", top: 9, left: 9, fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.1em", color: "var(--accent-ink)", background: "var(--accent-soft)", padding: "3px 7px", border: "1px solid var(--accent)" }}>ON</span>
+          : <span className="interest-hint-dot" style={{ position: "absolute", top: 10, left: 10, width: 9, height: 9, borderRadius: 999, background: "var(--accent)" }} />
+        }
+        <Sprite name={spriteMap[item.id] || item.sprite} scale={item.id === "models" ? 5 : 6} className="sprite" />
         {musicOn && <MusicNotes />}
         {effect && <InterestEffect kind={effect.kind} />}
       </div>
@@ -303,4 +286,4 @@ function TechSticker({ children, tone = 0 }) {
   );
 }
 
-Object.assign(window, { PortfolioPage, PortfolioHero, PortfolioAbout, PortfolioProjects, PortfolioSkills, PortfolioAi, PortfolioInterests, PortfolioContact, TechTag, TechSticker });
+Object.assign(window, { PortfolioPage, PortfolioHero, PortfolioAbout, PortfolioProjects, PortfolioSkills, PortfolioInterests, PortfolioContact, TechTag, TechSticker });
