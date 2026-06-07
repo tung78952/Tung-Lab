@@ -41,7 +41,7 @@ function Root() {
   const accent = SITE_CONFIG.accent;
 
   return (
-    <div style={{ "--accent": accent }}>
+    <div style={{ "--accent": accent, "--display-font": locale === "vi" ? "'Handjet', sans-serif" : "'Pixelify Sans', sans-serif" }}>
       <Header locale={locale} setLocale={setLocale} t={str} onNav={onNav} route={route} theme={theme} toggleTheme={toggleTheme} />
       {route === "home" && <Home heroVariant={SITE_CONFIG.heroVariant} cardVariant={SITE_CONFIG.cardVariant} locale={locale} t={str} onNav={onNav} pixel={SITE_CONFIG.pixelEdges} theme={theme} />}
       {route === "fphoto" && <Detail app={fphoto} locale={locale} t={str} onNav={onNav} theme={theme} />}

@@ -272,23 +272,23 @@ const SPRITES = {
   interestGaming: {
     palette: INTEREST_PAL,
     grid: [
-      "...KKKKKKKK.....", "..KKKKKKKKKK....", ".KKKKKKKKKKKK...", ".KKKKKKKKKKKK...",
-      ".KKKKKFFFKKKK...", ".KKKFFFFFFFKK...", ".KKFFFFFFFFFK...", ".KFFKFFFFKFFK...",
-      ".KFFFFFFFFFFK...", ".KFFFFKKFFFFK...", "..KFFFFFFFFK....", "...KFFFFFFK.....",
-      "..KAAAWWWWAAAK..", ".KAAAWWWWWWAAAK.", ".KFFGGGGGGGGFFK.", ".KFFGSSSSSSGGFK.",
-      ".KFFGSSSSSSGAFK.", ".KFFGGKGGGAGGFK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
-      "..KKKKK..KKKKK.."
+      "..KKKKKKKKKKKK..", "..KSSSSSSSSSSK..", "..KSVVVVVVVSSK..", "..KSVVSSVVVSSK..",
+      "..KSVKKKKKKVSK..", "..KSKKKKKKKKSK..", "..KKKKKKKKKKKK..", "...KKKKKKKKKK...",
+      "...KKKKKKKKKK...", "...KKKKKKKKKK...", "...KAAWWWWAAK...", "..KFAWWWWWWAFK..",
+      "..KFFWWWWWWFFK..", "..KFFWWWWWWFFK..", "...KWWWWWWWWK...", "..KKWWWWWWWWKK..",
+      ".KDDKWWWWWWKDDK.", ".KDDDDDDDDDDDDK.", "..KDDDDDDDDDDK..", "...KKKKKKKKKK...",
+      "....KSSSSSSK...."
     ]
   },
   interestModel: {
     palette: INTEREST_PAL,
     grid: [
-      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
-      "..KKKKKFFFKKKK..", "..KKKFFFFFFFKK..", "..KKFFFFFFFFFK..", "..KFFKFFFFKFFK..",
-      "..KFFFFFFFFFFK..", "..KFFFFKKFFFFK..", "...KFFFFFFFFK...", "....KFFFFFFK....",
-      "..KAAAyAAyKAAK..", ".KAAAWDDDDWAAAK.", ".KAAWDMMMMDWWAK.", ".KFFWDVVVVDWFFK.",
-      ".KFFWDMMMMDWFFK.", ".KFFWWDMMDWWFFK.", "..KWWWDMMDWWWK..", "..KKKKDMMDKKKK..",
-      "..KKKKK..KKKKK.."
+      ".........y..y...........", "........yK..Ky..........", ".......yKK..KKy.........", "......yKKKyyKKKy........",
+      ".......KWWWWWWK.........", "......KWWrrrrWWK........", ".....KWWyyyyyyWWK.......", ".....KWWyKyyKyWWK.......",
+      ".....KWWWWKKWWWWK.......", "......KWWKrrKWWK........", ".......KWWrrWWK.........", "......KWWWWWWWWK........",
+      "...KWWKKKSSKKKWWK.......", "..KWWKrrKSSKrrKWWK......", ".KDDKrrKSSKrrKDDK.......", ".KDDK..KSSK..KDDK.......",
+      "..KK...KrrK...KK........", "......KWrWWK............", ".....KWWKKWWK...........", "....KWWK..KWWK..........",
+      "...KrrK....KrrK.........", "...KrrK....KrrK.........", "....KK......KK..........", "......KSSSSK............"
     ]
   },
   interestFootball: {
@@ -482,7 +482,7 @@ function Header({ locale, setLocale, t, onNav, route, theme, toggleTheme }) {
         <div className="site-header-inner" style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <button className="site-brand" onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
             <BrandMascot theme={theme} />
-            <span className="site-brand-text" style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
+            <span className="site-brand-text" style={{ fontFamily: "var(--display-font)", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
           </button>
           <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
@@ -537,7 +537,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
           <div style={{ maxWidth: 360 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
               <BrandMascot theme={theme} size="footer" />
-              <span style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 24, color: "var(--band-ink)" }}>Tung Lab</span>
+              <span style={{ fontFamily: "var(--display-font)", fontSize: 24, color: "var(--band-ink)" }}>Tung Lab</span>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--band-muted)", margin: 0 }}>{t.footer.blurb}</p>
           </div>
@@ -561,7 +561,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
 function FooterCol({ title, children }) {
   return (
     <div>
-      <div style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 16, color: "var(--band-ink)", marginBottom: 14 }}>{title}</div>
+      <div style={{ fontFamily: "var(--display-font)", fontSize: 16, color: "var(--band-ink)", marginBottom: 14 }}>{title}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>{children}</div>
     </div>);
 

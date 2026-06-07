@@ -24,12 +24,12 @@ function PortfolioHero({ copy, t, onNav, theme }) {
       <div className="portfolio-hero" style={{ maxWidth: 1180, margin: "0 auto", padding: "72px 28px 86px", display: "grid", gridTemplateColumns: "1.04fr 0.96fr", gap: 54, alignItems: "center" }}>
         <div>
           <HeroKicker>{copy.hero.kicker}</HeroKicker>
-          <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(48px, 7vw, 86px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px" }}>{copy.hero.title}</h1>
+          <h1 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(48px, 7vw, 86px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px" }}>{copy.hero.title}</h1>
           <p style={{ fontSize: 19, color: "var(--ink-soft)", lineHeight: 1.65, maxWidth: 620, margin: 0 }}>{copy.hero.subtitle}</p>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
             <Btn variant="primary" size="lg" onClick={() => scrollToId("portfolio-projects")}>{copy.buttons.projects}</Btn>
             <Btn variant="ghost" size="lg" href="https://github.com/tung78952">GitHub</Btn>
-            <Btn variant="soft" size="lg" onClick={() => scrollToId("portfolio-contact")}>{t.cta.contact}</Btn>
+            <Btn variant="ghost" size="lg" onClick={() => scrollToId("portfolio-contact")}>{t.cta.contact}</Btn>
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -40,7 +40,7 @@ function PortfolioHero({ copy, t, onNav, theme }) {
             </div>
             <div style={{ position: "absolute", left: 2, top: 84, transform: "rotate(-8deg)" }}><Sprite name="bot" scale={6} /></div>
             {theme === "dark" && (
-              <div style={{ position: "absolute", right: 42, top: 56, display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(7deg)" }}>
+              <div style={{ position: "absolute", right: 42, top: 56, display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "var(--display-font)", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(7deg)" }}>
                 <span style={{ fontSize: 18, opacity: 0.55 }}>z</span>
                 <span style={{ fontSize: 28, opacity: 0.8 }}>Z</span>
                 <span style={{ fontSize: 40 }}>Z</span>
@@ -63,7 +63,7 @@ function PortfolioAbout({ copy, theme }) {
           <div style={{ position: "relative", width: "min(100%, 280px)", minHeight: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
             {theme === "dark" && <CoffeeSteam />}
             {theme !== "dark" && (
-              <div style={{ position: "absolute", right: 14, top: 34, fontFamily: "'Pixelify Sans', sans-serif", fontSize: 44, color: "var(--accent)", transform: "rotate(7deg)", filter: "drop-shadow(2px 2px 0 var(--surface))" }}>?</div>
+              <div style={{ position: "absolute", right: 14, top: 34, fontFamily: "var(--display-font)", fontSize: 44, color: "var(--accent)", transform: "rotate(7deg)", filter: "drop-shadow(2px 2px 0 var(--surface))" }}>?</div>
             )}
             <div style={{
               display: "flex",
@@ -123,7 +123,7 @@ function PortfolioProjects({ copy, textKey }) {
                 <span style={{ display: "inline-flex", alignItems: "center", padding: "5px 9px", border: "2px solid var(--ink)", background: "var(--accent)", color: "#fff", boxShadow: "2px 2px 0 var(--shadow)", fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.12em" }}>{project.type}</span>
                 <div style={{ display: "flex", transform: "rotate(3deg)" }}><Sprite name={project.icon} scale={4} /></div>
               </div>
-              <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", color: "var(--ink)", fontSize: 29, lineHeight: 1.02, margin: 0 }}>{project.name}</h3>
+              <h3 style={{ fontFamily: "var(--display-font)", color: "var(--ink)", fontSize: 29, lineHeight: 1.02, margin: 0 }}>{project.name}</h3>
               <p style={{ fontSize: 14.5, color: "var(--ink-soft)", lineHeight: 1.62, margin: 0 }}>{project[textKey]}</p>
               <div style={{ borderLeft: "4px solid var(--accent)", padding: "8px 0 8px 12px", background: "color-mix(in srgb, var(--surface) 72%, transparent)" }}>
                 <div style={{ fontFamily: "ui-monospace, monospace", fontSize: 10, letterSpacing: "0.13em", fontWeight: 800, color: "var(--accent-ink)", marginBottom: 5 }}>WHAT I LEARNED</div>
@@ -151,7 +151,7 @@ function PortfolioSkills({ copy }) {
         <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18, marginTop: 34 }}>
           {PORTFOLIO.skills.map((group) => (
             <article key={group.group} style={{ border: "2px solid var(--border)", background: "var(--bg)", padding: 18 }}>
-              <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", color: "var(--ink)", fontSize: 22, margin: "0 0 12px" }}>{group.group}</h3>
+              <h3 style={{ fontFamily: "var(--display-font)", color: "var(--ink)", fontSize: 22, margin: "0 0 12px" }}>{group.group}</h3>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {group.items.map((item) => <TechTag key={item}>{item}</TechTag>)}
               </div>
@@ -219,11 +219,11 @@ function InteractiveInterestCard({ item, textKey }) {
     <button type="button" onClick={click} className={`interest-card ${musicOn ? "interest-music-on" : ""}`} style={{ position: "relative", background: "var(--surface)", border: "2px solid var(--ink)", boxShadow: "4px 4px 0 var(--shadow)", padding: 16, minHeight: 300, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer", font: "inherit", color: "inherit", overflow: "hidden" }}>
       <div style={{ position: "relative", height: 178, width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center", marginBottom: 14 }}>
         <span style={{ position: "absolute", top: 7, left: 7, fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.11em", color: "var(--accent-ink)", background: "var(--accent-soft)", padding: "4px 7px" }}>{musicOn ? "ON" : "CLICK"}</span>
-        <Sprite name={spriteMap[item.id] || item.sprite} scale={6} />
+        <Sprite name={spriteMap[item.id] || item.sprite} scale={item.id === "models" ? 5 : 6} />
         {musicOn && <MusicNotes />}
         {effect && <InterestEffect kind={effect.kind} />}
       </div>
-      <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 23, color: "var(--ink)", margin: "0 0 9px" }}>{item.title}</h3>
+      <h3 style={{ fontFamily: "var(--display-font)", fontSize: 23, color: "var(--ink)", margin: "0 0 9px" }}>{item.title}</h3>
       <p style={{ fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.55, margin: 0 }}>{item[textKey]}</p>
     </button>
   );
@@ -233,7 +233,7 @@ function MusicNotes() {
   return (
     <>
       {["♪", "♫", "♪", "♫"].map((note, i) => (
-        <span key={i} className="interest-note" style={{ position: "absolute", left: `${34 + i * 18}%`, bottom: 94 + (i % 2) * 16, color: "var(--accent)", fontFamily: "'Pixelify Sans', sans-serif", fontSize: 20 + i * 2, animationDelay: `${i * 0.16}s`, pointerEvents: "none" }}>{note}</span>
+        <span key={i} className="interest-note" style={{ position: "absolute", left: `${34 + i * 18}%`, bottom: 94 + (i % 2) * 16, color: "var(--accent)", fontFamily: "var(--display-font)", fontSize: 20 + i * 2, animationDelay: `${i * 0.16}s`, pointerEvents: "none" }}>{note}</span>
       ))}
     </>
   );
@@ -251,18 +251,24 @@ function InterestEffect({ kind }) {
     );
   }
   if (kind === "gaming") {
-    return <span className="interest-glow" style={{ position: "absolute", left: "50%", bottom: 48, width: 112, height: 112, marginLeft: -56, borderRadius: 999, background: "var(--accent2)", mixBlendMode: "screen", filter: "blur(8px)", zIndex: 3, pointerEvents: "none" }} />;
+    return (
+      <>
+        <span className="interest-glow" style={{ position: "absolute", left: "50%", bottom: 48, width: 112, height: 112, marginLeft: -56, borderRadius: 999, background: "var(--accent2)", mixBlendMode: "screen", filter: "blur(8px)", zIndex: 3, pointerEvents: "none" }} />
+        <span className="interest-goal" style={{ position: "absolute", left: "50%", top: 18, color: "var(--accent2)", fontFamily: "var(--display-font)", fontSize: 22, textShadow: "2px 2px 0 var(--shadow)", whiteSpace: "nowrap", zIndex: 6 }}>PLAY!</span>
+      </>
+    );
   }
   if (kind === "models") {
     return (
       <>
         <span className="interest-glow" style={{ position: "absolute", left: "50%", bottom: 86, width: 44, height: 12, marginLeft: -22, background: "#7ad6ff", boxShadow: "0 0 14px 5px #7ad6ff", zIndex: 5, pointerEvents: "none" }} />
-        {["✦", "✦", "✦"].map((star, i) => <span key={i} className="interest-shimmer" style={{ position: "absolute", left: `${42 + i * 10}%`, bottom: 102 + i * 10, color: "#7ad6ff", fontFamily: "'Pixelify Sans', sans-serif", fontSize: 15 + i * 2, animationDelay: `${i * 0.12}s`, zIndex: 6 }}>{star}</span>)}
+        <span className="interest-goal" style={{ position: "absolute", left: "50%", top: 18, color: "var(--accent)", fontFamily: "var(--display-font)", fontSize: 22, textShadow: "2px 2px 0 var(--shadow)", whiteSpace: "nowrap", zIndex: 6 }}>BUILD!</span>
+        {["✦", "✦", "✦"].map((star, i) => <span key={i} className="interest-shimmer" style={{ position: "absolute", left: `${42 + i * 10}%`, bottom: 102 + i * 10, color: "#7ad6ff", fontFamily: "var(--display-font)", fontSize: 15 + i * 2, animationDelay: `${i * 0.12}s`, zIndex: 6 }}>{star}</span>)}
       </>
     );
   }
   if (kind === "football") {
-    return <span className="interest-goal" style={{ position: "absolute", left: "50%", top: 18, color: "var(--accent)", fontFamily: "'Pixelify Sans', sans-serif", fontSize: 24, textShadow: "2px 2px 0 var(--shadow)", whiteSpace: "nowrap", zIndex: 6 }}>SIUUU!</span>;
+    return <span className="interest-goal" style={{ position: "absolute", left: "50%", top: 18, color: "var(--accent)", fontFamily: "var(--display-font)", fontSize: 24, textShadow: "2px 2px 0 var(--shadow)", whiteSpace: "nowrap", zIndex: 6 }}>SIUUU!</span>;
   }
   return null;
 }
