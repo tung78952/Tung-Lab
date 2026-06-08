@@ -329,15 +329,9 @@ function About({ t, theme, onNav }) {
           <p style={{ fontSize: 18, color: "var(--band-muted)", lineHeight: 1.7, margin: "18px 0 0", maxWidth: 540 }}>{t.about.body}</p>
           <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--band-border)", display: "flex" }}>
             <button type="button" className="about-pixel-arrow-cta" onClick={() => onNav("about-me")}>
-              <span className="about-pixel-arrow-deco" aria-hidden="true">
-                <span />
-                <span />
-              </span>
-              <span className="about-pixel-arrow-label">{t.cta.aboutMe}</span>
-              <span className="about-pixel-arrow-head" aria-hidden="true">
-                <span />
-                <span />
-                <span />
+              <span className="about-pixel-arrow-shadow" aria-hidden="true" />
+              <span className="about-pixel-arrow-border">
+                <span className="about-pixel-arrow-face">{t.cta.aboutMe}</span>
               </span>
             </button>
           </div>

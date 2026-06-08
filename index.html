@@ -70,88 +70,52 @@
     }
     .about-pixel-arrow-cta {
       position: relative;
+      display: inline-block;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      --about-arrow-clip: polygon(0 0, calc(100% - 24px) 0, calc(100% - 24px) 16.66%, calc(100% - 16px) 16.66%, calc(100% - 16px) 33.33%, calc(100% - 8px) 33.33%, calc(100% - 8px) 41.66%, 100% 41.66%, 100% 58.33%, calc(100% - 8px) 58.33%, calc(100% - 8px) 66.66%, calc(100% - 16px) 66.66%, calc(100% - 16px) 83.33%, calc(100% - 24px) 83.33%, calc(100% - 24px) 100%, 0 100%);
+    }
+    .about-pixel-arrow-shadow {
+      position: absolute;
+      inset: 0;
+      transform: translate(4px, 4px);
+      background: #a84e32;
+      clip-path: var(--about-arrow-clip);
+    }
+    .about-pixel-arrow-border {
+      position: relative;
+      display: inline-block;
+      padding: 2px;
+      background: var(--ink);
+      clip-path: var(--about-arrow-clip);
+      transition: transform .12s ease;
+    }
+    .about-pixel-arrow-face {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
-      min-width: 236px;
-      height: 58px;
-      padding: 0 58px 0 22px;
-      border: 2px solid var(--accent);
-      background: var(--surface);
-      color: var(--ink);
-      cursor: pointer;
-      font: inherit;
-      font-weight: 800;
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 58%, var(--ink)), 5px 5px 0 var(--shadow);
-      transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
-    }
-    .about-pixel-arrow-deco {
-      display: inline-flex;
-      gap: 5px;
-      flex: 0 0 auto;
-    }
-    .about-pixel-arrow-deco span {
-      width: 8px;
-      height: 8px;
+      height: 44px;
+      padding: 0 38px 0 22px;
       background: var(--accent);
-      display: block;
-    }
-    .about-pixel-arrow-label {
-      position: relative;
-      z-index: 2;
-      line-height: 1;
+      color: #fff;
+      clip-path: var(--about-arrow-clip);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .01em;
       white-space: nowrap;
-    }
-    .about-pixel-arrow-head {
-      position: absolute;
-      right: -28px;
-      top: 50%;
-      width: 42px;
-      height: 42px;
-      transform: translateY(-50%);
-      transition: transform .14s ease;
-    }
-    .about-pixel-arrow-head span {
-      position: absolute;
-      right: 0;
-      display: block;
-      background: var(--surface);
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 58%, var(--ink));
-      transition: background .14s ease;
-    }
-    .about-pixel-arrow-head span:nth-child(1) {
-      top: 0;
-      width: 18px;
-      height: 14px;
-      border-bottom: 0;
-    }
-    .about-pixel-arrow-head span:nth-child(2) {
-      top: 12px;
-      width: 34px;
-      height: 18px;
-    }
-    .about-pixel-arrow-head span:nth-child(3) {
-      bottom: 0;
-      width: 18px;
-      height: 14px;
-      border-top: 0;
     }
     .about-pixel-arrow-cta:hover,
     .about-pixel-arrow-cta:focus-visible {
-      transform: translate(-2px, -2px);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 58%, var(--ink)), 7px 7px 0 var(--shadow);
       outline: none;
     }
-    .about-pixel-arrow-cta:hover,
-    .about-pixel-arrow-cta:focus-visible,
-    .about-pixel-arrow-cta:hover .about-pixel-arrow-head span,
-    .about-pixel-arrow-cta:focus-visible .about-pixel-arrow-head span {
-      background: color-mix(in srgb, var(--surface) 86%, var(--accent-soft));
+    .about-pixel-arrow-cta:hover .about-pixel-arrow-border,
+    .about-pixel-arrow-cta:focus-visible .about-pixel-arrow-border {
+      transform: translate(-2px, -2px);
     }
-    .about-pixel-arrow-cta:hover .about-pixel-arrow-head,
-    .about-pixel-arrow-cta:focus-visible .about-pixel-arrow-head {
-      transform: translate(3px, -50%);
+    .about-pixel-arrow-cta:active .about-pixel-arrow-border {
+      transform: translate(2px, 2px);
     }
     .project-note {
       transform: rotate(var(--note-rotate, 0deg));
