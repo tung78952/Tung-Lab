@@ -20,6 +20,36 @@ function PixelArt({ grid, palette, scale = 8, className, style }) {
 
 /* tokens: O=outline(ink) A=accent L=accent-light W=highlight S=secondary(blue) */
 const PAL = { O: "var(--ink)", A: "var(--accent)", L: "var(--accent-lt)", W: "var(--hl)", S: "var(--accent2)" };
+const TUNG_POSE_PAL = {
+  ".": "transparent",
+  K: "#241f1b",
+  F: "var(--skin)",
+  A: "var(--accent)",
+  W: "#fbf2ef",
+  Z: "var(--accent)"
+};
+const INTEREST_PAL = {
+  ".": "transparent",
+  K: "#241f1b",
+  F: "var(--skin)",
+  f: "#d49a73",
+  A: "var(--accent)",
+  W: "#fbf2ef",
+  w: "#e9ded9",
+  G: "#5b5750",
+  M: "#9a948c",
+  D: "#1a1815",
+  B: "#2b3640",
+  H: "#a8c0cc",
+  V: "#7ad6ff",
+  S: "var(--accent2)",
+  P: "#857f77",
+  g: "#7fae5e",
+  r: "#cf5b50",
+  y: "#e8c14a",
+  j: "#cf1124",
+  n: "#0a7d3f"
+};
 const SPRITES = {
   camera: { palette: PAL, grid: [
     "....OOOO....", "...OAAAAO...", "..OAAAAAAO..", "..OALWWLAO..",
@@ -30,6 +60,54 @@ const SPRITES = {
     "...O..O...", "...O..O...", "..OOOOOO..", ".OAAAAAAO.",
     ".OAWOWOAO.", ".OAWOWOAO.", ".OAAAAAAO.", ".OOAAAAOO.",
     "OSO.OO.OSO", "OSOOAAOOSO", "..OO..OO..", "..OO..OO.."]
+  },
+  music: { palette: PAL, grid: [
+    "....OOOO....", "...OAAAAO...", "..OAWWAAO..", ".OAWWWWAO.",
+    ".OAAWWAAO.", ".OOAAAAOO.", "..OAAAAO..", ".OOOAAOOO.",
+    "O.SOAAOS.O", "O.SOAAOS.O", "...O..O...", "...O..O..."]
+  },
+  football: { palette: PAL, grid: [
+    "...OOOO.....", "..OAAAAO....", ".OAWWAAO....", ".OAAAAAO....",
+    "..OAAAAOO...", "...OOOOAO...", "..OOAAAO....", ".OAAAOO.....",
+    ".OAAO..OOO..", "..OO..OAWAO.", ".....OAAAAO", "......OOOO."]
+  },
+  model: { palette: PAL, grid: [
+    "....OOO.....", "...OAAAO....", "..OAWWAO....", "..OAAAO.....",
+    "...OOO..OO..", "..OOAAOOAAO.", ".OAAAAAAOO..", ".OAOSSAAO...",
+    "..OOAAOO....", "...O..O.....", "..OO..OO....", ".OS....SO..."]
+  },
+  bike: { palette: PAL, grid: [
+    "................",
+    ".....OOO..OO....",
+    "......AAAAAO....",
+    "......A...AA....",
+    ".....A....AA....",
+    "..OOAA...A.OAO..",
+    ".O..AA...AO.A.O.",
+    "O..A..AAAO.....O",
+    "O..O..AO.O..O..O",
+    "O.....O..O.....O",
+    ".O...O....O...O.",
+    "..OOO......OOO.."]
+  },
+  exam: {
+    palette: { ".": "transparent", O: "var(--ink)", W: "#fbf2ef", A: "var(--accent)", k: "#2a2620", r: "#d8392f" },
+    grid: [
+    "...OOOOOOOOO.",
+    "..OOWWWrrrWO.",
+    ".OOWWWrWWWrO.",
+    ".OWWWWrWrWrO.",
+    ".OWWWWrWWWrO.",
+    ".OWWWWWrrrWO.",
+    ".OWWWWWWWWWO.",
+    ".OWAAAAAAAWO.",
+    ".OWkkkkkWWWO.",
+    ".OWWWWWWWWWO.",
+    ".OWkkkkkkkWO.",
+    ".OWAAAAAAWWO.",
+    ".OWkkkkkkkWO.",
+    ".OWWWWWWWWWO.",
+    ".OOOOOOOOOOO."]
   },
   // "?" tile — for unnamed / coming-soon apps
   question: { palette: PAL, grid: [
@@ -87,6 +165,194 @@ const SPRITES = {
     ".OFFFFFFFOAAAAAAAAO.", ".OFFFFFFOOAAAAAAAAO.", ".WWWWWWWWOAAAAAAAAO.",
     ".OWWWWWWOOAAAAAAAAO.", ".OOOOOOOOOOOOOOOOOO.", "..OOOOOOOOOOOOOO...."]
 
+  },
+  tungThumb: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFKKFFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFKFF..",
+      "..KAAAWWWWAAFFFF",
+      ".KAAAWWWWWWAFFFF",
+      ".KAAWWWWWWWWAFFF",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  tungSleepPose: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFKKFFFFKKFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFFKKFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFK....",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWWWWWWAAAK.",
+      ".KAAWWWWWWWWAAK.",
+      ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  tungCoffee: {
+    palette: { ...TUNG_POSE_PAL, T: "var(--muted)", S: "var(--accent2)" },
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..",
+      "..KKKFFFFFFFKK..",
+      "..KKFFFFFFFFFK..",
+      "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..",
+      "..KFFFFKKFFFFK..",
+      "...KFFFFFFFFK...",
+      "....KFFFFFFK....",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWTWTWWAAAK.",
+      ".KAAWWKSSSKKWAK.",
+      ".KFFWWKSSSKSKFK.",
+      ".KFFWWKSSSKSKFK.",
+      ".KFFWWKKSSKKWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  tungConfused: {
+    palette: TUNG_POSE_PAL,
+    grid: [
+      "....KKKKKKKK....",
+      "...KKKKKKKKKK...",
+      "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKFFF..",
+      "..KKKKKFFFKKFF..",
+      "..KKKFFFFFFFKF..",
+      "..KKFFFFFFFFFKF.",
+      "..KFFKFFFFKFFKF.",
+      "..KFFFFFFFFFFKA.",
+      "..KFFFFKKFFFFKA.",
+      "...KFFFFFFFFKAA.",
+      "....KFFFFFFKAA..",
+      "..KAAAWWWWAAAK..",
+      ".KAAAWWWWWWAAAK.",
+      ".KAAWWWWWWWWAAK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      ".KFFWWWWWWWWWWK.",
+      "..KWWWWWWWWWWK..",
+      "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestCamera: {
+    palette: INTEREST_PAL,
+    grid: [
+      "...KKKKKKKK.....", "..KKKKKKKKKK....", ".KKKKKKKKKKKK...", ".KKKKKKKKKKKKK..",
+      ".KKKKKKfFFFKKK..", ".KKKKfFFFFFFKK..", ".KKKfFFFFFFFFK..", ".KKfFFKFFFFKFK..",
+      ".KKfFFFFFFFFFK..", ".KKfFFFFKKFFFK..", "..KKfFFFFFFFK...", "...KfFFFFFFK....",
+      "..KAAAWGGGWAAK..", ".KFFWGGDDGGWFFK.", ".KFFWGDHBDGGFFK.", ".KFFWGDBBDGGFFK.",
+      ".KFFWGGDDGGWFFK.", ".KFFWWWWWWWWWWK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestMusic: {
+    palette: INTEREST_PAL,
+    grid: [
+      "...PPPPPPPPPP...", "..PKKKKKKKKKKP..", ".PKKKKKKKKKKKKP.", ".PKKKKKKKKKKKKP.",
+      ".PKKKKKFFFKKKKP.", "PPKKKFFFFFFFKKPP", "PAKKFFFFFFFFFKAP", "PAKFFKFFFFKFFKAP",
+      "PAKFFFFFFFFFFKAP", "PPKFFFFKKFFFFKPP", "..KKFFFFFFFFKK..", "...KFFFFFFFFK...",
+      "..KAAAWWWWAAAK..", ".KAAAWWWWWWAAAK.", ".KAAWWWWWWWWAAK.", ".KFFWWWWWWWWFFK.",
+      ".KFFWWWWWWWWFFK.", ".KFFWWWWWWWWFFK.", "..KWWWWWWWWWWK..", "..KKKKKKKKKKKK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestGaming: {
+    palette: INTEREST_PAL,
+    grid: [
+      "..KKKKKKKKKKKK..", "..KSSSSSSSSSSK..", "..KSVVVVVVVSSK..", "..KSVVSSVVVSSK..",
+      "..KSVKKKKKKVSK..", "..KSKKKKKKKKSK..", "..KKKKKKKKKKKK..", "...KKKKKKKKKK...",
+      "...KKKKKKKKKK...", "...KKKKKKKKKK...", "...KAAWWWWAAK...", "..KFAWWWWWWAFK..",
+      "..KFFWWWWWWFFK..", "..KFFWWWWWWFFK..", "...KWWWWWWWWK...", "..KKWWWWWWWWKK..",
+      ".KDDKWWWWWWKDDK.", ".KDDDDDDDDDDDDK.", "..KDDDDDDDDDDK..", "...KKKKKKKKKK...",
+      "....KSSSSSSK...."
+    ]
+  },
+  interestModel: {
+    palette: INTEREST_PAL,
+    grid: [
+      ".....MK...KjjK...KM.....",
+      "......MK..KjjK..KM......",
+      ".......MK.KjjK.KM.......",
+      "....KKKKKKKjjKKKKKKK....",
+      "....KWWWWWWjjWWWWWWK....",
+      "....KWWWWyWWWWyWWWWK....",
+      "....KWWWWWyWWyWWWWWK....",
+      "....KWWWWWWyyWWWWWWK....",
+      "....KWKyyKKWWKKyyKWK....",
+      "....KWKKyKKWWKKyKKWK....",
+      "....KWWWKKKKKKKKWWWK....",
+      "....KWWWWGWGGWGWWWWK....",
+      ".....KWWWWWWWWWWWWK.....",
+      "......KWWWWWWWWWWK......",
+      "..KSSSSKWWWWWWWWKSSSSK..",
+      "..KSSSSKyyWWWWyyKSSSSK..",
+      "..KSSSSKWjWSSWjWKSSSSK..",
+      "..KSSSSKWrWSSWrWKSSSSK..",
+      "..KSSSSKWWWWWWWWKSSSSK..",
+      "...KKKK.WWWWWWWW.KKKK...",
+      "........KMMrrMMK........",
+      ".........KKKKKK.........",
+      "........................",
+      "........................"
+    ]
+  },
+  interestFootball: {
+    palette: INTEREST_PAL,
+    grid: [
+      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKFFFKKKK..", "..KKKFFFFFFFKK..", "..KKFFFFFFFFFK..", "..KFFKFFFFKFFK..",
+      "..KFFFFFFFFFFK..", "..KFFFFKKFFFFK..", "...KFFFFFFFFK...", "....KFFFFFFK....",
+      "..KjjjjnnjjjjK..", ".KjjjjjnnjjjjjK.", ".KjjjjjjjjjjjjK.", ".KFFjjjjjjyjFFK.",
+      ".KFFjjjjjjjjFFK.", ".KFFjjjjjjjjFFK.", "..KjjjjjjjjjjK..", "..KnnnnnnnnnnK..",
+      "..KKKKK..KKKKK.."
+    ]
+  },
+  interestFootballBack: {
+    palette: INTEREST_PAL,
+    grid: [
+      "....KKKKKKKK....", "...KKKKKKKKKK...", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..",
+      "..KKKKKKKKKKKK..", "..KKKKKKKKKKKK..", "...KKKKKKKKKK...", "....KFFFFFFK....",
+      "..KjjjjjjjjjjK..", "..KFjjWWWWjjFK..", ".KFjjjjjjWjjjFK.", "KFjjjjjjWjjjjjFK",
+      "KFjjjjjWjjjjjjFK", "..KjjjjjjjjjjK..", "..KnnnnnnnnnnK..", "..KnnnnnnnnnnK..",
+      "..KKKKK..KKKKK.."
+    ]
   }
 };
 
@@ -257,12 +523,12 @@ function Header({ locale, setLocale, t, onNav, route, theme, toggleTheme }) {
         <div className="site-header-inner" style={{ maxWidth: 1180, margin: "0 auto", padding: "14px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <button className="site-brand" onClick={() => onNav("home")} style={{ display: "flex", alignItems: "center", gap: 11, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
             <BrandMascot theme={theme} />
-            <span className="site-brand-text" style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
+            <span className="site-brand-text" style={{ fontFamily: "var(--display-font)", fontSize: 26, fontWeight: 600, color: "var(--ink)", lineHeight: 1 }}>Tung Lab</span>
           </button>
           <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <NavLink active={route === "home"} onClick={() => onNav("home")}>{t.nav.home}</NavLink>
             <NavLink active={false} onClick={() => onNav("home", "apps")}>{t.nav.apps}</NavLink>
-            <NavLink active={false} onClick={() => onNav("home", "about")}>{t.nav.about}</NavLink>
+            <NavLink active={route === "about-me"} onClick={() => onNav("about-me")}>{t.nav.aboutMe}</NavLink>
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             <LangSwitch locale={locale} setLocale={setLocale} />
           </nav>
@@ -312,7 +578,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
           <div style={{ maxWidth: 360 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
               <BrandMascot theme={theme} size="footer" />
-              <span style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 24, color: "var(--band-ink)" }}>Tung Lab</span>
+              <span style={{ fontFamily: "var(--display-font)", fontSize: 24, color: "var(--band-ink)" }}>Tung Lab</span>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--band-muted)", margin: 0 }}>{t.footer.blurb}</p>
           </div>
@@ -323,6 +589,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
             </FooterCol>
             <FooterCol title="Links">
               <FooterLink href="https://github.com/tung78952">{t.footer.github}</FooterLink>
+              <FooterLink onClick={() => onNav("about-me")}>{t.nav.aboutMe}</FooterLink>
               <FooterLink onClick={() => onNav("home", "about")}>{t.nav.about}</FooterLink>
             </FooterCol>
           </div>
@@ -335,7 +602,7 @@ function Footer({ t, onNav, edgeAlign = "content", theme }) {
 function FooterCol({ title, children }) {
   return (
     <div>
-      <div style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 16, color: "var(--band-ink)", marginBottom: 14 }}>{title}</div>
+      <div style={{ fontFamily: "var(--display-font)", fontSize: 16, color: "var(--band-ink)", marginBottom: 14 }}>{title}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>{children}</div>
     </div>);
 

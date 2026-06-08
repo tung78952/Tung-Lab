@@ -20,7 +20,7 @@ function HeroStats({ t }) {
     <div style={{ display: "flex", gap: 30, marginTop: 38, flexWrap: "wrap" }}>
       {items.map(([n, l], i) => (
         <div key={i}>
-          <div style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 30, color: "var(--ink)", lineHeight: 1 }}>{n}</div>
+          <div style={{ fontFamily: "var(--display-font)", fontSize: 30, color: "var(--ink)", lineHeight: 1 }}>{n}</div>
           <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{l}</div>
         </div>
       ))}
@@ -36,7 +36,7 @@ function HeroSplit({ t, onNav, pixel, theme }) {
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "70px 28px 90px", display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 50, alignItems: "center" }} className="hero-grid">
         <div>
           <HeroKicker>{t.hero.kicker}</HeroKicker>
-          <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(48px, 7vw, 88px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px", letterSpacing: "-0.01em" }}>{t.hero.title}</h1>
+          <h1 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(48px, 7vw, 88px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px", letterSpacing: "-0.01em" }}>{t.hero.title}</h1>
           <p style={{ fontSize: 22, fontWeight: 600, color: "var(--ink)", margin: "0 0 14px", lineHeight: 1.35 }}>{t.hero.tagline}</p>
           <p style={{ fontSize: 17, color: "var(--ink-soft)", lineHeight: 1.6, margin: 0, maxWidth: 460 }}>{t.hero.desc}</p>
           <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
@@ -45,7 +45,7 @@ function HeroSplit({ t, onNav, pixel, theme }) {
           </div>
           <HeroStats t={t} />
         </div>
-        <MascotScene theme={theme} />
+        <MascotScene theme={theme} label={t.about.mascotHint} onClick={() => onNav("about-me")} />
       </div>
       <PixelEdge color="var(--accent)" align="content" />
     </section>
@@ -60,7 +60,7 @@ function HeroCentered({ t, onNav }) {
       <div style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "78px 28px 92px" }}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 26 }}><Sprite name="bot" scale={9} /></div>
         <div style={{ display: "flex", justifyContent: "center" }}><HeroKicker>{t.hero.kicker}</HeroKicker></div>
-        <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(52px, 8vw, 96px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px" }}>{t.hero.title}</h1>
+        <h1 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(52px, 8vw, 96px)", lineHeight: 0.98, color: "var(--ink)", margin: "0 0 18px" }}>{t.hero.title}</h1>
         <p style={{ fontSize: 23, fontWeight: 600, color: "var(--ink)", margin: "0 auto 14px", maxWidth: 560, lineHeight: 1.35 }}>{t.hero.tagline}</p>
         <p style={{ fontSize: 17, color: "var(--ink-soft)", lineHeight: 1.6, margin: "0 auto", maxWidth: 520 }}>{t.hero.desc}</p>
         <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap", justifyContent: "center" }}>
@@ -84,7 +84,7 @@ function HeroAsymmetric({ t, onNav }) {
             <span style={{ width: 8, height: 8, background: "#fff" }} />
             <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 12, letterSpacing: "0.22em", color: "#fff", fontWeight: 700, opacity: 0.9 }}>{t.hero.kicker}</span>
           </div>
-          <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(50px, 7.5vw, 94px)", lineHeight: 0.98, color: "#fff", margin: "0 0 18px" }}>{t.hero.title}</h1>
+          <h1 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(50px, 7.5vw, 94px)", lineHeight: 0.98, color: "#fff", margin: "0 0 18px" }}>{t.hero.title}</h1>
           <p style={{ fontSize: 22, fontWeight: 600, color: "#fff", margin: "0 0 14px", lineHeight: 1.35 }}>{t.hero.tagline}</p>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,0.86)", lineHeight: 1.6, margin: 0, maxWidth: 440 }}>{t.hero.desc}</p>
           <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
@@ -106,24 +106,28 @@ function FloatCartridge({ sprite, style, label, big, onClick }) {
   return (
     <div onClick={onClick} style={{ position: "absolute", width: big ? 200 : 130, background: "var(--surface)", border: "2px solid var(--ink)", boxShadow: "6px 6px 0 var(--shadow)", padding: big ? 20 : 14, cursor: onClick ? "pointer" : "default", ...style }}>
       <div style={{ display: "flex", justifyContent: "center", marginBottom: 10 }}><Sprite name={sprite} scale={big ? 7 : 5} /></div>
-      <div style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: big ? 22 : 15, textAlign: "center", color: "var(--ink)" }}>{label}</div>
+      <div style={{ fontFamily: "var(--display-font)", fontSize: big ? 22 : 15, textAlign: "center", color: "var(--ink)" }}>{label}</div>
     </div>
   );
 }
 
-function MascotScene({ theme }) {
+function MascotScene({ theme, label, onClick }) {
   const asleep = theme === "dark";
   return (
-    <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+    <button aria-label="Open About Me" className="hero-mascot-button" onClick={onClick} style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", background: "none", border: "none", padding: 0, cursor: "pointer" }}>
       <div className="hero-mascot-frame" style={{ position: "relative", width: 380, height: 380 }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 45%, var(--accent-soft), transparent 65%)" }} />
+        <div className="mascot-hint" style={{ position: "absolute", bottom: 62, left: "50%", transform: "translateX(-50%) rotate(-2deg)", zIndex: 6, display: "inline-flex", alignItems: "center", gap: 5, padding: "5px 8px", background: "var(--surface)", color: "var(--ink)", border: "2px solid var(--ink)", boxShadow: "3px 3px 0 var(--shadow)", fontFamily: "ui-monospace, monospace", fontSize: 10, fontWeight: 800, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
+          <span className="mascot-hint-dot" style={{ width: 5, height: 5, background: "var(--accent)", display: "inline-block" }} />
+          {label}
+        </div>
         {asleep ? (
           <>
             <div style={{ position: "absolute", top: 26, right: 24, transform: "rotate(6deg)", opacity: 0.85 }}><Sprite name="fphoto" scale={5} /></div>
             <div style={{ position: "absolute", top: 44, left: 16, transform: "rotate(-8deg)", opacity: 0.8 }}><Sprite name="question" scale={5} /></div>
             <div style={{ position: "absolute", bottom: 150, right: 70, transform: "rotate(5deg)", opacity: 0.8 }}><Sprite name="question" scale={5} /></div>
             <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-52%)" }}><Sprite name="tungSleep" scale={9} /></div>
-            <div style={{ position: "absolute", top: 180, left: "40%", display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(-6deg)" }}>
+            <div style={{ position: "absolute", top: 180, left: "40%", display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "var(--display-font)", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(-6deg)" }}>
               <span style={{ fontSize: 22, opacity: 0.55 }}>z</span>
               <span style={{ fontSize: 32, opacity: 0.8 }}>Z</span>
               <span style={{ fontSize: 46 }}>Z</span>
@@ -143,7 +147,7 @@ function MascotScene({ theme }) {
           <div style={{ width: 180, height: 12, background: "var(--accent)", opacity: 0.6 }} />
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 function CornerPixels() {
@@ -190,7 +194,7 @@ function CardClean({ app, accent, c, isLive, win, t, onNav }) {
         <StatusBadge status={app.status} t={t} />
       </div>
       <div>
-        <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, color: "var(--ink)", margin: "0 0 6px" }}>{app.name}</h3>
+        <h3 style={{ fontFamily: "var(--display-font)", fontSize: 26, color: "var(--ink)", margin: "0 0 6px" }}>{app.name}</h3>
         <p style={{ fontSize: 14.5, color: "var(--ink-soft)", lineHeight: 1.55, margin: 0 }}>{c.tagline}</p>
       </div>
       <PlatformRow platforms={app.platforms} t={t} />
@@ -221,7 +225,7 @@ function CardCartridge({ app, accent, c, isLive, win, t, onNav }) {
       </div>
       <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 14, flex: 1 }}>
         <div>
-          <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 26, color: "var(--ink)", margin: "0 0 6px" }}>{app.name}</h3>
+          <h3 style={{ fontFamily: "var(--display-font)", fontSize: 26, color: "var(--ink)", margin: "0 0 6px" }}>{app.name}</h3>
           <p style={{ fontSize: 14.5, color: "var(--ink-soft)", lineHeight: 1.55, margin: 0 }}>{c.tagline}</p>
         </div>
         <PlatformRow platforms={app.platforms} t={t} />
@@ -244,7 +248,7 @@ function CardRow({ app, accent, c, isLive, win, t, onNav }) {
       <div style={{ display: "flex" }}><Sprite name={app.pixelLogo} scale={8} /></div>
       <div>
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
-          <h3 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 30, color: "var(--ink)", margin: 0 }}>{app.name}</h3>
+          <h3 style={{ fontFamily: "var(--display-font)", fontSize: 30, color: "var(--ink)", margin: 0 }}>{app.name}</h3>
           <StatusBadge status={app.status} t={t} />
           {isLive && <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 12, color: "var(--muted)" }}>v{app.version}</span>}
         </div>
@@ -290,13 +294,13 @@ function SectionHead({ kicker, title, sub, light }) {
         <span style={{ width: 8, height: 8, background: light ? "var(--accent-lt)" : "var(--accent)" }} />
         <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 12, letterSpacing: "0.2em", color: light ? "var(--accent-lt)" : "var(--accent)", fontWeight: 700 }}>{kicker}</span>
       </div>
-      <h2 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(34px, 5vw, 52px)", color: light ? "var(--band-ink)" : "var(--ink)", margin: "0 0 10px", lineHeight: 1 }}>{title}</h2>
+      <h2 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(34px, 5vw, 52px)", color: light ? "var(--band-ink)" : "var(--ink)", margin: "0 0 10px", lineHeight: 1 }}>{title}</h2>
       {sub && <p style={{ fontSize: 17, color: light ? "var(--band-muted)" : "var(--ink-soft)", margin: 0, maxWidth: 540 }}>{sub}</p>}
     </div>
   );
 }
 
-function About({ t, theme }) {
+function About({ t, theme, onNav }) {
   const isDark = theme === "dark";
   return (
     <section id="about" style={{ background: "var(--band)", color: "var(--band-ink)", position: "relative" }}>
@@ -307,7 +311,7 @@ function About({ t, theme }) {
             ? (
               <div style={{ position: "relative", width: 260, height: 150, display: "flex", alignItems: "center", justifyContent: "center", transform: "translateY(45px)" }}>
                 <Sprite name="tungSleep" scale={11} />
-                <div style={{ position: "absolute", top: -50, left: 116, display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "'Pixelify Sans', sans-serif", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(-6deg)" }}>
+                <div style={{ position: "absolute", top: -50, left: 116, display: "flex", alignItems: "flex-end", gap: 4, fontFamily: "var(--display-font)", color: "var(--accent-lt)", lineHeight: 1, transform: "rotate(-6deg)" }}>
                   <span style={{ fontSize: 20, opacity: 0.55 }}>z</span>
                   <span style={{ fontSize: 30, opacity: 0.78 }}>Z</span>
                   <span style={{ fontSize: 42 }}>Z</span>
@@ -315,7 +319,7 @@ function About({ t, theme }) {
               </div>
             )
             : (
-              <div style={{ display: "flex", filter: "drop-shadow(0 0 0 #fff) drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(8px 8px 0 var(--accent))" }}>
+              <div style={{ display: "flex", filter: "drop-shadow(0 0 0 var(--surface)) drop-shadow(4px 0 0 var(--surface)) drop-shadow(-4px 0 0 var(--surface)) drop-shadow(0 4px 0 var(--surface)) drop-shadow(0 -4px 0 var(--surface)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(9px 9px 0 var(--accent))" }}>
                 <MascotAsset size="about" />
               </div>
             )}
@@ -323,6 +327,14 @@ function About({ t, theme }) {
         <div>
           <SectionHead kicker="ABOUT" title={t.about.title} light />
           <p style={{ fontSize: 18, color: "var(--band-muted)", lineHeight: 1.7, margin: "18px 0 0", maxWidth: 540 }}>{t.about.body}</p>
+          <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--band-border)", display: "flex" }}>
+            <button type="button" className="about-pixel-arrow-cta" onClick={() => onNav("about-me")}>
+              <span className="about-pixel-arrow-shadow" aria-hidden="true" />
+              <span className="about-pixel-arrow-border">
+                <span className="about-pixel-arrow-face">{t.cta.aboutMe}</span>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -334,7 +346,7 @@ function Home({ heroVariant, cardVariant, locale, t, onNav, pixel, theme }) {
     <main>
       <Hero variant={heroVariant} t={t} onNav={onNav} pixel={pixel} theme={theme} />
       <Gallery apps={APPS} cardVariant={cardVariant} locale={locale} t={t} onNav={onNav} />
-      <About t={t} theme={theme} />
+      <About t={t} theme={theme} onNav={onNav} />
     </main>
   );
 }

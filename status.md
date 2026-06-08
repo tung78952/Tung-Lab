@@ -1,72 +1,174 @@
-# Tung Lab Website Status
+# Tung Lab Portfolio Experiment Status
 
-Ngay cap nhat: 2026-06-05
+Ngay cap nhat: 2026-06-06
 
-## Thu muc chinh
+## Scope hien tai
 
-Website hien tai nam trong:
+Day la worktree thu nghiem, khong phai folder deploy chinh.
 
-`D:/Tunglab/claude-design-fixed`
+- Worktree thu nghiem: `D:/Tunglab/tung-lab-portfolio-experiment`
+- Branch: `portfolio-mascot`
+- Base repo chinh/deploy: `D:/Tunglab/claude-design-fixed` tren `main`
+- Folder chinh van sach va chua bi merge/push nhung thay doi portfolio.
 
-Server dang xem ben app browser:
-
-`http://localhost:4174/#top`
-
-Lenh chay lai neu can:
+Chay local de xem ban thu nghiem:
 
 ```powershell
-python -m http.server 4174 --bind 127.0.0.1 --directory D:\Tunglab\claude-design-fixed
+python -m http.server 4175 --bind 127.0.0.1 --directory D:\Tunglab\tung-lab-portfolio-experiment
 ```
 
-## File dang dung
+URL dang xem trong in-app browser:
 
-- `index.html`: entry HTML chinh cua website.
-- `app.jsx`: root app, route home/detail, locale va dark mode.
-- `data.jsx`: noi dung app, i18n, thong tin FPhoto.
-- `ui.jsx`: shared UI, pixel sprite, header/footer, button, badge, mascot asset.
-- `home.jsx`: trang chu Tung Lab va card ung dung.
-- `fphoto.jsx`: trang chi tiet FPhoto.
-- `assets/mascot-light.png`: mascot light mode da chot.
+`http://127.0.0.1:4175/`
 
-## Da lam duoc
+## Checkpoint commits tren branch nay
 
-- Chot website Tung Lab la noi gom cac mini app tu lam, khong con la website rieng cho FPhoto.
-- Trang chu co hero Tung Lab, danh sach app, about Tung Lab, footer link.
-- Co route chi tiet FPhoto rieng khi bam xem chi tiet.
-- Co dark mode/light mode bang nut tren header.
-- Light mode dung mascot pixel da chot theo reference.
-- Dark mode dung canh nhan vat ngu/laptop, co icon phu va chu `zZz`.
-- Logo FPhoto tren card home da thay logo moi, khong con icon cam cu.
-- Logo FPhoto da bo khung vuong ben ngoai.
-- Logo FPhoto doi mau theo theme: pixel vien dung `var(--ink)` nen light/dark co phan ung mau.
-- Card app dang dung kieu cartridge pixel, app chua co thi hien `Untitled - 02`, `Untitled - 03`.
-- Da go panel tweak/test cua Claude ra khoi app chinh.
-- Da xoa file HTML trung `Tung Lab.html`.
+- `25f5993` Add About Me portfolio experiment
+- `2e8dbd6` Update About Me hero mascot poses
+- `9ca588a` Update About section mascot poses
+- `bd276c3` Refine coffee mascot steam effect
+- `46ac19b` Add GitHub links to portfolio projects
+- `9c96292` Restyle portfolio projects as pixel notes
+- `a497377` Add project note hover lift
+- `472d662` Add interactive interest mascots
 
-## Da don dep
+## File moi / file chinh can doc truoc
 
-Da xoa:
+- `portfolio.jsx`: trang About Me / portfolio moi.
+- `data.jsx`: co object `PORTFOLIO` gom copy song ngu, projects, skills, interests, contact.
+- `ui.jsx`: shared sprites, gom mascot poses va sprites tuong tac.
+- `index.html`: CSS responsive, hover/effect keyframes, script load `portfolio.jsx`.
+- `app.jsx`: route moi `about-me`.
+- `home.jsx`: mascot hero va CTA cuoi home link sang `about-me`.
+- `scraps/mascot-poses.html`: source tham khao pose tinh tu Claude.
+- `scraps/interactive-mascots.html`: source tham khao mascot click/effect tu Claude.
 
-- `tweaks-panel.jsx`
-- `Tung Lab.html`
+## Routing / navigation da lam
 
-Hien trong folder chi con cac file can cho website chinh va asset mascot.
+- Them route `about-me` trong `app.jsx`.
+- Header co nav `Về tôi` / `About Me`.
+- Footer co link `About Me`.
+- Click mascot hero trang Home se mo About Me.
+- Cuoi section About Tung Lab tren Home co CTA `Xem About Me`.
 
-## Luu y con mo
+## About Me page da co
 
-- Trang chi tiet FPhoto trong `data.jsx` dang khai bao screenshot tai `assets/fphoto/*.png`, nhung folder nay chua co trong ban hien tai. Khi co anh that, tao `assets/fphoto/` va them cac file:
-  - `workspace.png`
-  - `search.png`
-  - `grid.png`
-  - `preview.png`
-  - `copy.png`
-- Link tai Windows cua FPhoto trong data can duoc cap nhat thanh link GitHub release moi nhat khi ban co release that.
-- Neu chuyen may, chi can mang ca folder `D:/Tunglab/claude-design-fixed`.
+`portfolio.jsx` hien co cac section:
 
-## Huong design da chot
+- Hero: intro Tung, button Projects / GitHub / Contact.
+- About: doan gioi thieu tu nhien, khong qua CV.
+- Featured Projects.
+- Skills & Tools.
+- AI-assisted Workflow.
+- Outside Coding / Interests.
+- Contact.
 
-- Pixel style, vien sac, bong do dang block.
-- Mau chu dao warm/off-white + cam gach `#cc6b4e`.
-- Mascot light mode phai giu dung asset `assets/mascot-light.png`.
-- Dark mode co the la trang thai khac cua mascot, nhung van phai cung identity.
-- App logo/sprite nen doi mau theo theme bang CSS variables, tranh khoa mau den co dinh.
+Noi dung copy song ngu VI/EN nam trong `PORTFOLIO` cua `data.jsx`.
+
+## Mascot / sprite da lam
+
+### Hero About Me
+
+- Light mode: `tungThumb` trong `ui.jsx` lay tu pose "Gio ngon cai" cua `scraps/mascot-poses.html`.
+- Dark mode: `tungSleepPose` trong `ui.jsx` lay tu pose "Buon ngu".
+- Da bo icon FPhoto ben phai hero vi nhin giong chu P.
+
+### About section tren About Me
+
+- Light mode: `tungConfused` lay tu pose "Ngo ngac".
+- Dark mode: `tungCoffee` lay tu pose "Cam ly ca phe".
+- Khong con khung vuong quanh mascot.
+- Co drop-shadow/outline de dark mode khong bi chim vao nen.
+- Coffee steam nam trong function `CoffeeSteam()` cua `portfolio.jsx`.
+  - Vi tri chinh sua nhanh: div wrapper trong `CoffeeSteam`, hien `left: 120, top: 120` theo user tu chinh.
+  - Animation khong nam trong JSX ma trong `index.html` keyframes `coffeeSteam`.
+
+### Interests interactive mascots
+
+Sprites port tu `scraps/interactive-mascots.html` vao `ui.jsx`:
+
+- `interestGaming`
+- `interestMusic`
+- `interestCamera`
+- `interestFootball`
+- `interestFootballBack`
+- `interestModel`
+
+Component click/effect nam trong `portfolio.jsx`:
+
+- `InteractiveInterestCard`
+- `MusicNotes`
+- `InterestEffect`
+
+Hieu ung:
+
+- Gaming: glow man hinh.
+- Music: click toggle `ON`, mascot bob, note nhac bay.
+- Photography: flash + polaroid.
+- Football: click doi sang lung ao + `SIUUU!`.
+- Model kits: robot glow + spark.
+
+CSS/keyframes lien quan nam trong `index.html`:
+
+- `.interest-card`
+- `.interest-music-on`
+- `.interest-flash`
+- `.interest-polaroid`
+- `.interest-note`
+- `.interest-glow`
+- `.interest-shimmer`
+- `.interest-goal`
+- `@keyframes flashPop`, `polaroidOut`, `floatUp`, `bob`, `screenFlicker`, `shimmer`, `goalPop`
+
+## Featured Projects da restyle
+
+`PortfolioProjects` trong `portfolio.jsx` da doi tu card thuong sang note/pinboard pixel:
+
+- Moi project la mot note co tape o dau.
+- Co stamp: `FULL-STACK`, `COURSE PROJECT`, `PERSONAL APP`.
+- Co icon pixel nho:
+  - `store` cho BikeStore
+  - `exam` cho Exam Generation
+  - `fphoto` cho FPhoto
+- Co block `WHAT I LEARNED`.
+- Tech stack la sticker bang `TechSticker`.
+- Moi note co nut GitHub o day card.
+- Hover note co hieu ung nhac/lat giay nhe.
+- Hover GitHub link dung class rieng `.project-github-link` de tranh cursor giat.
+
+GitHub project links trong `data.jsx`:
+
+- BikeStore: `https://github.com/tung78952/bike-store-fullstack`
+- Exam: `https://github.com/tung78952/Exam-Generation-and-Grading-Management-System`
+- FPhoto: `https://github.com/tung78952/FPhoto`
+
+CSS hover project note nam trong `index.html`:
+
+- `.project-note`
+- `.project-note:hover`
+- `.project-github-link`
+- `.project-github-link:hover`
+
+## Validation da chay
+
+Da test bang headless Chromium tren `http://127.0.0.1:4175/`:
+
+- Route About Me render duoc.
+- Nav `Về tôi` mo dung route.
+- Click mascot Home mo dung About Me.
+- Header van fixed.
+- Featured Projects co 3 note va 3 link GitHub dung URL.
+- Hover note doi transform/shadow.
+- Hover GitHub link doi mau, cursor pointer.
+- Interests co 5 interactive cards.
+- Click tung interest card tao effect, music toggle ON.
+- Mobile width 390px khong tran ngang (`scrollWidth == clientWidth`).
+- Khong co console/page error trong cac lan test.
+
+## Luu y quan trong cho agent sau
+
+- Dung `workdir` la `D:/Tunglab/tung-lab-portfolio-experiment` neu tiep tuc sua portfolio.
+- Khong sua/push `D:/Tunglab/claude-design-fixed` tru khi user noi merge/deploy.
+- Branch nay la thu nghiem local, chua merge vao `main`.
+- Neu can deploy ve web that: review lan cuoi, merge/cherry-pick sang `main`, bump cache query trong `index.html` neu file JS/CSS doi, roi push `main`.
+- Neu user noi ve "mấy con mascot trong HTML luc nay", xem `scraps/mascot-poses.html` va `scraps/interactive-mascots.html` truoc.

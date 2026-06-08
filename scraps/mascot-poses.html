@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tung — bộ tư thế mascot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#faf8f4; --surface:#ffffff; --surface-2:#f7f3ec;
+    --ink:#22201c; --ink-soft:#55514a; --muted:#928d83;
+    --border:#e8e3d8; --shadow:#22201c; --accent:#cc6b4e; --accent-ink:#8a4429; --accent-soft:#f6e7df;
+    --band:#1b1a17; --band-ink:#f3eee4; --band-muted:#928d82; --band-border:#34302a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:var(--bg); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding:46px 28px 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .kicker span{width:8px;height:8px;background:var(--accent);}
+  .kicker b{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.22em;color:var(--accent);font-weight:700;}
+  h1{font-family:'Pixelify Sans',sans-serif;font-size:clamp(38px,5.5vw,64px);line-height:1.02;margin:0 0 14px;letter-spacing:-.01em;}
+  .lead{font-size:17px;color:var(--ink-soft);line-height:1.65;max-width:680px;margin:0 0 6px;}
+  .note{font-size:14px;color:var(--muted);max-width:680px;margin:6px 0 0;}
+
+  h2{font-family:'Pixelify Sans',sans-serif;font-size:30px;margin:56px 0 6px;}
+  .sub{font-size:14.5px;color:var(--ink-soft);margin:0 0 26px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;}
+  .card{
+    border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);
+    display:flex;flex-direction:column;overflow:hidden;background:var(--surface);
+  }
+  .card .stage{
+    flex:1;display:flex;align-items:flex-end;justify-content:center;
+    min-height:300px;padding:26px 18px 22px;position:relative;
+  }
+  .card .meta{border-top:2px solid var(--ink);padding:14px 16px;background:var(--surface);}
+  .card .pose{font-family:'Pixelify Sans',sans-serif;font-size:21px;line-height:1;margin:0 0 5px;color:var(--ink);}
+  .card .use{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0;}
+  .tag{position:absolute;top:12px;left:12px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;color:var(--accent-ink);background:var(--accent-soft);padding:4px 9px;}
+
+  /* dark stage */
+  .grid.dark .card{background:var(--surface);}
+  .grid.dark .stage{background:var(--band);}
+  .grid.dark .tag{background:var(--band-border);color:var(--band-ink);}
+
+  .sprite{image-rendering:pixelated;display:grid;}
+  .z{font-family:'Pixelify Sans',sans-serif;color:var(--accent);position:absolute;font-weight:700;}
+  .footer-note{margin-top:60px;border-top:2px dashed var(--border);padding-top:22px;font-size:13.5px;color:var(--muted);line-height:1.7;max-width:760px;}
+  .footer-note b{color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker"><span></span><b>MASCOT · POSE SHEET</b></div>
+  <h1>Tung — vài tư thế mới</h1>
+  <p class="lead">Vẫn là đúng nhân vật Tung (tóc, mặt, mắt, áo thun trắng tay cam — không đổi gì), chỉ thay đổi cử chỉ và biểu cảm để dùng cho từng trang khác nhau và cho chế độ sáng / tối.</p>
+  <p class="note">Tất cả dựng bằng pixel art nên tự đổi tông theo theme. Xem qua rồi nói tôi giữ cái nào, bỏ cái nào — duyệt xong tôi mới gắn vào web.</p>
+
+  <h2>Chế độ sáng — Tung thức, năng động</h2>
+  <p class="sub">Các cử chỉ chào hỏi / dẫn dắt, hợp cho hero, nút CTA, trang giới thiệu.</p>
+  <div class="grid" id="lightGrid"></div>
+
+  <h2>Chế độ tối — Tung thư giãn</h2>
+  <p class="sub">Khi chuyển sang dark mode, mascot đổi sang trạng thái nghỉ ngơi nhưng vẫn là chính cậu ấy.</p>
+  <div class="grid dark" id="darkGrid"></div>
+
+  <h2>Bộ sở thích — cho trang Interests</h2>
+  <p class="sub">Mỗi sở thích một dáng riêng, để rải cạnh các thẻ Gaming / Âm nhạc / Chụp ảnh / Bóng đá / Mô hình.</p>
+  <div class="grid" id="hobbyGrid"></div>
+
+  <p class="footer-note">
+    <b>Ghi chú identity:</b> mọi tư thế dùng chung 1 cái đầu (tóc + khuôn mặt + mắt), cùng bảng màu da / áo / tay áo cam. Không thêm phụ kiện làm đổi nhân vật.
+    Nếu bạn muốn thêm tư thế khác (ngồi code, đá banh, cầm mô hình…) cứ nói, mình vẽ thêm theo đúng style này.
+  </p>
+</div>
+
+<script>
+/* ---- palette (character colors are FIXED to keep identity) ---- */
+const PAL = {
+  ".":"transparent",
+  "K":"#241f1b", // hair / outline / eyes / mouth
+  "F":"#e6b289", // skin
+  "A":"#cc6b4e", // orange sleeve / accent
+  "W":"#fbf2ef", // shirt white
+  "S":"#5e89ad", // blue (robot feet)
+  "Z":"#cc6b4e", // sleepy z (accent)
+  "T":"#9a948a", // steam (muted)
+  "G":"#5b5750", // gray body (camera / controller)
+  "D":"#1a1815", // near-black (lens ring / device edge)
+  "B":"#2b3640", // dark glass (lens)
+  "H":"#a8c0cc", // lens / screen shine
+  "P":"#3a3833"  // headphone dark
+};
+
+/* ---- shared 16x21 construction. Head rows are identical everywhere. ---- */
+const HEAD = [
+  "....KKKKKKKK....", // 0
+  "...KKKKKKKKKK...", // 1
+  "..KKKKKKKKKKKK..", // 2
+  "..KKKKKKKKKKKK..", // 3
+  "..KKKKKFFFKKKK..", // 4
+  "..KKKFFFFFFFKK..", // 5
+  "..KKFFFFFFFFFK..", // 6
+  "..KFFKFFFFKFFK..", // 7  eyes col5,col10
+  "..KFFFFFFFFFFK..", // 8
+  "..KFFFFKKFFFFK..", // 9  mouth col7,8
+  "...KFFFFFFFFK...", // 10
+  "....KFFFFFFK....", // 11
+];
+
+/* base torso (idle: both arms down) */
+const POSES = {};
+
+POSES.idle = {
+  label:"Đứng yên", use:"Mặc định — hero, footer.",
+  grid: HEAD.concat([
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+POSES.wave = {
+  label:"Vẫy chào", use:"Lời chào đầu trang / hero.",
+  grid: [
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKFFFKKKK..",
+  "..KKKFFFFFFFKKFF",
+  "..KKFFFFFFFFFKFF",
+  "..KFFKFFFFKFFKF.",
+  "..KFFFFFFFFFFKF.",
+  "..KFFFFKKFFFFKF.",
+  "...KFFFFFFFFKAA.",
+  "....KFFFFFFKAA..",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ]
+};
+
+POSES.point = {
+  label:"Chỉ tay", use:"Dẫn tới nút bấm / link.",
+  grid: HEAD.concat([
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAA.",
+  ".KAAWWWWWWWWAFFF",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+POSES.thumb = {
+  label:"Giơ ngón cái", use:"Thành công / tải xong / OK.",
+  grid: [
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKFFFKKKK..",
+  "..KKKFFFFFFFKK..",
+  "..KKFFFFFFFFFK..",
+  "..KFFKFFFFKFFK..",
+  "..KFFFFFFFFFFK..",
+  "..KFFFFKKFFFFK..",
+  "...KFFFFFFFFK...",
+  "....KFFFFFFKFF..",
+  "..KAAAWWWWAAFFFF",
+  ".KAAAWWWWWWAFFFF",
+  ".KAAWWWWWWWWAFFF",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ]
+};
+
+POSES.camera = {
+  label:"Cầm máy ảnh", use:"Liên hệ chụp ảnh / FPhoto.",
+  grid: HEAD.concat([
+  "..KAAAWGGWAAAK..",
+  ".KFFGGGGGGGGFFK.",
+  ".KFFGGGDDGGGFFK.",
+  ".KFFGGDHBDGGFFK.",
+  ".KFFGGDBBDGGFFK.",
+  ".KFFGGGDDGGGFFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+/* ---- DARK MODE poses ---- */
+POSES.sleep = {
+  label:"Buồn ngủ", use:"Dark mode mặc định.",
+  z:true,
+  grid: [
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKFFFKKKK..",
+  "..KKKFFFFFFFKK..",
+  "..KKFFFFFFFFFK..",
+  "..KFKKFFFFKKFK..",
+  "..KFFFFFFFFFFK..",
+  "..KFFFFFKKFFFK..",
+  "...KFFFFFFFFK...",
+  "....KFFFFFFK....",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ]
+};
+
+POSES.coffee = {
+  label:"Cầm ly cà phê", use:"Dark mode — thư giãn, về / blog.",
+  grid: HEAD.concat([
+  "..KAAAWWWWAAAK..",
+  ".KAAAWTWTWWAAAK.",
+  ".KAAWWKSSSKKWAK.",
+  ".KFFWWKSSSKSKFK.",
+  ".KFFWWKSSSKSKFK.",
+  ".KFFWWKKSSKKWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+/* ---- CONFUSED ---- */
+POSES.confused = {
+  label:"Ngơ ngác", use:"Trang lỗi / 404 / chưa có gì.",
+  tilt:0, badge:{ch:"?", right:"24px", top:"14px", size:"40px"},
+  grid: [
+  "....KKKKKKKK....",
+  "...KKKKKKKKKK...",
+  "..KKKKKKKKKKKK..",
+  "..KKKKKKKKKFFF..",
+  "..KKKKKFFFKKFF..",
+  "..KKKFFFFFFFKF..",
+  "..KKFFFFFFFFFKF.",
+  "..KFFKFFFFKFFKF.",
+  "..KFFFFFFFFFFKA.",
+  "..KFFFFKKFFFFKA.",
+  "...KFFFFFFFFKAA.",
+  "....KFFFFFFKAA..",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ]
+};
+
+/* ---- HOBBY poses (cho trang Sở thích) ---- */
+POSES.gaming = {
+  label:"Chơi game", use:"Sở thích — Gaming.",
+  grid: HEAD.concat([
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KFFGGGGGGGGFFK.",
+  ".KFFGKGGGGAAGFK.",
+  ".KFFGGGGGGGGFFK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+POSES.music = {
+  label:"Nghe nhạc", use:"Sở thích — Âm nhạc.",
+  badge:{ch:"♪", right:"26px", top:"18px", size:"34px"},
+  grid: [
+  "..AAAAAAAAAAAA..",
+  ".AKKKKKKKKKKKKA.",
+  ".AKKKKKKKKKKKKA.",
+  ".AKKKKKKKKKKKKA.",
+  ".AKKKKKFFFKKKKA.",
+  ".AKKKFFFFFFFKKA.",
+  "AAKKFFFFFFFFFKAA",
+  "AAKFFKFFFFKFFKAA",
+  "AAKFFFFFFFFFFKAA",
+  ".AKFFFFKKFFFFKA.",
+  "...KFFFFFFFFK...",
+  "....KFFFFFFK....",
+  "..KAAAWWWWAAAK..",
+  ".KAAAWWWWWWAAAK.",
+  ".KAAWWWWWWWWAAK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  ".KFFWWWWWWWWFFK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ]
+};
+
+POSES.football = {
+  label:"Đá banh", use:"Sở thích — Bóng đá.",
+  grid: HEAD.concat([
+  "..KAAAWWWWAAAK..",
+  ".KAAAWKKKKWAAAK.",
+  ".KAAWKWWWWKWAAK.",
+  ".KFFKWKKWWKWWFK.",
+  ".KFFKWWKKWWKWFK.",
+  ".KFFWKWWWWKWWFK.",
+  "..KWWKKKKKKWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+POSES.model = {
+  label:"Chơi mô hình", use:"Sở thích — Mô hình.",
+  grid: HEAD.concat([
+  "..KAAAGGGGAAAK..",
+  ".KAAAWGSSGWAAAK.",
+  ".KAAWFGGGGFWAAK.",
+  ".KFFWFGGGGFWWFK.",
+  ".KFFWWGWWGWWWFK.",
+  ".KFFWWWWWWWWWWK.",
+  "..KWWWWWWWWWWK..",
+  "..KKKKKKKKKKKK..",
+  "..KKKKK..KKKKK..",
+  ])
+};
+
+function render(pose, scale){
+  const g = pose.grid;
+  const rows = g.length, cols = g[0].length;
+  const el = document.createElement("div");
+  el.className = "sprite";
+  el.style.gridTemplateColumns = `repeat(${cols}, ${scale}px)`;
+  el.style.gridTemplateRows = `repeat(${rows}, ${scale}px)`;
+  el.style.width = cols*scale+"px";
+  el.style.height = rows*scale+"px";
+  if(pose.tilt){ el.style.transform = `rotate(${pose.tilt}deg)`; el.style.transformOrigin="50% 75%"; }
+  g.forEach(line=>{
+    for(const ch of line){
+      const d = document.createElement("div");
+      d.style.width = scale+"px"; d.style.height = scale+"px";
+      d.style.background = PAL[ch]||"transparent";
+      el.appendChild(d);
+    }
+  });
+  return el;
+}
+
+function makeCard(key, scale){
+  const p = POSES[key];
+  const card = document.createElement("div");
+  card.className="card";
+  const stage = document.createElement("div");
+  stage.className="stage";
+  const tag = document.createElement("div");
+  tag.className="tag"; tag.textContent = key;
+  stage.appendChild(tag);
+  stage.appendChild(render(p, scale));
+  if(p.z){
+    const z = document.createElement("div");
+    z.className="z"; z.style.right="22px"; z.style.top="20px"; z.style.fontSize="26px";
+    z.textContent="z"; stage.appendChild(z);
+    const z2 = document.createElement("div");
+    z2.className="z"; z2.style.right="44px"; z2.style.top="40px"; z2.style.fontSize="17px";
+    z2.textContent="z"; stage.appendChild(z2);
+  }
+  if(p.badge){
+    const b = document.createElement("div");
+    b.className="z";
+    b.style.right=p.badge.right||"24px"; b.style.top=p.badge.top||"16px";
+    b.style.fontSize=p.badge.size||"34px";
+    b.textContent=p.badge.ch; stage.appendChild(b);
+  }
+  const meta = document.createElement("div");
+  meta.className="meta";
+  meta.innerHTML = `<p class="pose">${p.label}</p><p class="use">${p.use}</p>`;
+  card.appendChild(stage); card.appendChild(meta);
+  return card;
+}
+
+const SCALE = 13;
+["idle","wave","point","thumb","camera","confused"].forEach(k=>document.getElementById("lightGrid").appendChild(makeCard(k,SCALE)));
+["sleep","coffee"].forEach(k=>document.getElementById("darkGrid").appendChild(makeCard(k,SCALE)));
+["gaming","music","camera","football","model"].forEach(k=>document.getElementById("hobbyGrid").appendChild(makeCard(k,SCALE)));
+</script>
+</body>
+</html>

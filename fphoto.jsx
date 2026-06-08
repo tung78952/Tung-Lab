@@ -55,7 +55,7 @@ function Detail({ app, locale, t, onNav, theme }) {
               <div style={{ display: "flex" }}><Sprite name={app.pixelLogo} scale={9} /></div>
               <div>
                 <div className="detail-title-row" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                  <h1 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 48, color: "var(--ink)", margin: 0, lineHeight: 1 }}>{app.name}</h1>
+                  <h1 style={{ fontFamily: "var(--display-font)", fontSize: 48, color: "var(--ink)", margin: 0, lineHeight: 1 }}>{app.name}</h1>
                   <StatusBadge status={app.status} t={t} />
                 </div>
                 <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 13, color: "var(--muted)" }}>v{app.version}</span>
@@ -129,7 +129,7 @@ function Detail({ app, locale, t, onNav, theme }) {
             <ol style={{ listStyle: "none", padding: 0, margin: "30px 0 0", display: "flex", flexDirection: "column", gap: 12 }}>
               {c.usageSteps.map((s, i) => (
                 <li key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", background: "var(--surface)", border: "2px solid var(--border)", padding: "14px 16px" }}>
-                  <span style={{ flexShrink: 0, width: 30, height: 30, background: "var(--ink)", color: "var(--surface)", fontFamily: "'Pixelify Sans', sans-serif", fontSize: 17, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
+                  <span style={{ flexShrink: 0, width: 30, height: 30, background: "var(--ink)", color: "var(--surface)", fontFamily: "var(--display-font)", fontSize: 17, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
                   <span style={{ fontSize: 15.5, color: "var(--ink-soft)", lineHeight: 1.5, paddingTop: 3 }}>{s}</span>
                 </li>
               ))}
@@ -171,7 +171,7 @@ function Detail({ app, locale, t, onNav, theme }) {
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px)", backgroundSize: "28px 28px", opacity: 0.5 }} />
         <div style={{ position: "relative", maxWidth: 760, margin: "0 auto", padding: "70px 28px 80px", textAlign: "center" }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 22 }}><Sprite name={app.pixelLogo} scale={8} /></div>
-          <h2 style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: "clamp(32px, 5vw, 48px)", color: "#fff", margin: "0 0 12px" }}>{t.footerCta.title}</h2>
+          <h2 style={{ fontFamily: "var(--display-font)", fontSize: "clamp(32px, 5vw, 48px)", color: "#fff", margin: "0 0 12px" }}>{t.footerCta.title}</h2>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,0.88)", margin: "0 0 28px" }}>{t.footerCta.desc}</p>
           <Btn variant="ghost" size="lg" href={win?.url} icon={<DownloadIcon />}>{t.footerCta.btn}</Btn>
           <div style={{ marginTop: 14, fontFamily: "ui-monospace, monospace", fontSize: 12.5, color: "rgba(255,255,255,0.78)" }}>{win?.fileName} · {win?.fileSize}</div>
@@ -186,7 +186,7 @@ function DownloadPanel({ app, accent, win, locale, t }) {
   return (
     <div className="dl-panel" style={{ position: "sticky", top: 90, background: "var(--surface)", border: "2px solid var(--ink)", boxShadow: "6px 6px 0 var(--shadow)" }}>
       <div style={{ background: "var(--ink)", color: "var(--surface)", padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: "'Pixelify Sans', sans-serif", fontSize: 20 }}>{t.section.download}</span>
+        <span style={{ fontFamily: "var(--display-font)", fontSize: 20 }}>{t.section.download}</span>
         <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 12, color: "var(--accent-lt)" }}>v{app.version}</span>
       </div>
       <div style={{ padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
